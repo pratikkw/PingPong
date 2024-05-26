@@ -23,6 +23,9 @@
   place-items: center;
   background-color: var(--start-bk-clr);
 
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+
   &__help {
     cursor: pointer;
     position: absolute;
@@ -66,6 +69,7 @@
   height: var(--area-height);
   background-color: var(--area-bk-clr);
   position: relative;
+  overflow: hidden;
 
   &::after {
     content: "";
@@ -98,13 +102,15 @@
 }
 
 .paddle {
+  --position: 50;
+
   background-color: var(--paddle-clr);
   height: var(--paddle-height);
   width: var(--paddle-width);
   border-radius: 0.25rem;
 
   position: absolute;
-  left: 50%;
+  left: calc(var(--position) * 1vw);
   transform: translate(-50%, 0%);
 
   &__computer {
@@ -117,13 +123,16 @@
 }
 
 .ball {
+  --x: 50;
+  --y: 50;
+
   width: var(--ball-width);
   aspect-ratio: 1/1;
   border-radius: 50%;
   z-index: var(--ball-index);
   background-color: var(--white-clr);
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: calc(var(--y) * 1vh);
+  left: calc(var(--x) * 1vw);
   transform: translate(-50%, -50%);
 }

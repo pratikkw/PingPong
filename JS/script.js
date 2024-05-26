@@ -1,5 +1,27 @@
+import Ball from "./ball.js";
+import Paddle from "./paddle.js";
+
+const startSection = document.querySelector(".start");
+const gameArea = document.querySelector(".area");
 const magnetBtn = document.getElementById("magnet__btn");
 const magnetTxt = document.getElementById("magnet__txt");
+
+const ball = new Ball(document.querySelector(".ball"));
+const playerPaddle = new Paddle(document.querySelector(".paddle__user"));
+const computerPaddle = new Paddle(document.querySelector(".paddle__computer"));
+
+let lastTime;
+
+const updateBall = function (time) {
+  if (lastTime != null) {
+    const delta = time - lastTime;
+    computerPaddle.update(delta, ball.x);
+    ball.update(delta, [playerPaddle.rect(), computerPaddle.rect()]);
+  }
+
+  lastTime = time;
+  window.requestAnimationFrame(updateBall);
+};
 
 const moveBtn = function (e) {
   const magnetBtnStretch = 80;
@@ -50,6 +72,22 @@ const activeHoveFeatures = function () {
 
 window.addEventListener("load", function () {
   activeHoveFeatures();
+  window.requestAnimationFrame(updateBall);
 });
 
 window.addEventListener("resize", activeHoveFeatures);
+
+magnetBtn.addEventListener("click", function () {
+  startSection.classList.toggle("start--opacity");
+  setInterval(() => {
+    startSection.style.display = "none";
+  }, 1000);
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key == "ArrowLeft") {
+    playerPaddle.movePaddle(-2);
+  } else if (e.key == "ArrowRight") {
+    playerPaddle.movePaddle(2);
+  }
+});
