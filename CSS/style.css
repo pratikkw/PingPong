@@ -111,6 +111,7 @@ body {
   --ball-width: 1.75rem;
   --paddle-computer-top: 1vh;
   --paddle-user-bottom: 1vh;
+  --score-fs: 1.75rem;
   height: var(--area-height);
   background-color: var(--area-bk-clr);
   position: relative;
@@ -166,6 +167,19 @@ body {
   left: calc(var(--x) * 1vw);
   transform: translate(-50%, -50%); }
 
+.score {
+  position: absolute;
+  font-size: var(--score-fs);
+  font-weight: 500; }
+  .score__computer {
+    top: 45%;
+    right: 0%;
+    transform: translate(-50%, -50%); }
+  .score__player {
+    bottom: 45%;
+    left: 0%;
+    transform: translate(50%, 50%); }
+
 .hide {
   display: none; }
 
@@ -208,7 +222,9 @@ body {
     --help-icon-fs: 2.25rem;
     --start-btn-fs: 3rem;
     --start-btn-width: 14rem;
-    --start-btn-height: 14rem; } }
+    --start-btn-height: 14rem; }
+  .area {
+    --score-fs: 1.5rem; } }
 
 @media only screen and (max-width: 500px) {
   .start {

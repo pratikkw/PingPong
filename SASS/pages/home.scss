@@ -39,8 +39,6 @@
   }
 
   &__btn {
-    // background-color: var(--start-btn-bk-clr);
-    // color: var(--start-btn-txt-clr);
     font-size: var(--start-btn-fs);
     border-radius: 50%;
     width: var(--start-btn-width);
@@ -65,6 +63,9 @@
   // TOP, LEFT, RIGHT & BOTTOM
   --paddle-computer-top: 1vh;
   --paddle-user-bottom: 1vh;
+
+  // FONT
+  --score-fs: 1.75rem;
 
   height: var(--area-height);
   background-color: var(--area-bk-clr);
@@ -135,4 +136,30 @@
   top: calc(var(--y) * 1vh);
   left: calc(var(--x) * 1vw);
   transform: translate(-50%, -50%);
+}
+
+.score {
+  position: absolute;
+  font-size: var(--score-fs);
+  font-weight: 500;
+
+  &__computer {
+    top: 45%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__player {
+    bottom: 45%;
+    left: 0%;
+    transform: translate(50%, 50%);
+  }
+
+  .point {
+    &__player {
+    }
+
+    &__computer {
+    }
+  }
 }

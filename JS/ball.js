@@ -1,4 +1,5 @@
 const INITIAL_VELOCITY = 0.025;
+// const VELOCITY_INCRESE = 0.00001;
 
 export default class Ball {
   constructor(ballElem) {
@@ -44,11 +45,12 @@ export default class Ball {
   update(delta, paddleRects) {
     this.x += this.direction.x * this.velocity * delta;
     this.y += this.direction.y * this.velocity * delta;
+    // this.velocity += VELOCITY_INCRESE * delta;
     const rect = this.rect();
 
-    if (rect.bottom >= window.innerHeight || rect.top <= 0) {
-      this.direction.y *= -1;
-    }
+    // if (rect.bottom >= window.innerHeight || rect.top <= 0) {
+    //   this.direction.y *= -1;
+    // }
 
     if (rect.right >= window.innerWidth || rect.left <= 0) {
       this.direction.x *= -1;
