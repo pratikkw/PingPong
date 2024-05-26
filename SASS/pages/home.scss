@@ -1,0 +1,129 @@
+.main {
+  position: relative;
+}
+
+.start {
+  // TOP, LEFT, RIGHT & BOTTOM
+  --start-help-top: 1.25rem;
+  --start-help-right: 1.25rem;
+
+  // FONT
+  --help-icon-fs: 2.5rem;
+  --start-btn-fs: 4rem;
+
+  // WIDTH & HEIGHT
+  --start-btn-width: 16rem;
+  --start-btn-height: 16rem;
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--start-index);
+
+  display: grid;
+  place-items: center;
+  background-color: var(--start-bk-clr);
+
+  &__help {
+    cursor: pointer;
+    position: absolute;
+    top: var(--start-help-top);
+    right: var(--start-help-right);
+
+    .help__icon {
+      color: var(--white-clr);
+      font-size: var(--help-icon-fs);
+    }
+  }
+
+  &__btn {
+    // background-color: var(--start-btn-bk-clr);
+    // color: var(--start-btn-txt-clr);
+    font-size: var(--start-btn-fs);
+    border-radius: 50%;
+    width: var(--start-btn-width);
+    height: var(--start-btn-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+}
+
+.area {
+  // WIDTH & HEIGHT
+  --area-height: 100dvh;
+  --area-after-height: 6px;
+  --area-before-width: 18rem;
+  --paddle-height: 1.5vh;
+  --paddle-width: clamp(8rem, 8vw + 5rem, 14rem);
+  --ball-width: 1.75rem;
+
+  // TOP, LEFT, RIGHT & BOTTOM
+  --paddle-computer-top: 1vh;
+  --paddle-user-bottom: 1vh;
+
+  height: var(--area-height);
+  background-color: var(--area-bk-clr);
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: var(--area-after-height);
+    background-color: var(--area-line-clr);
+
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    z-index: var(--area-after-index);
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    width: var(--area-before-width);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 8px solid var(--area-line-clr);
+    background-color: var(--area-bk-clr);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: var(--area-before-index);
+  }
+}
+
+.paddle {
+  background-color: var(--paddle-clr);
+  height: var(--paddle-height);
+  width: var(--paddle-width);
+  border-radius: 0.25rem;
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
+  &__computer {
+    top: var(--paddle-computer-top);
+  }
+
+  &__user {
+    bottom: var(--paddle-user-bottom);
+  }
+}
+
+.ball {
+  width: var(--ball-width);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  z-index: var(--ball-index);
+  background-color: var(--white-clr);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

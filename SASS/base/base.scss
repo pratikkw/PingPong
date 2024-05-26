@@ -1,0 +1,85 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  font: inherit;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  outline: none;
+  border: none;
+  font: inherit;
+}
+
+input,
+label,
+select,
+textarea {
+  font: inherit;
+}
+
+:root {
+  // BACKGROUND COLOR
+  --area-bk-clr: hsl(165, 83%, 37%);
+  --paddle-clr: hsl(193, 9%, 19%);
+  --area-line-clr: hsl(163, 83%, 64%);
+  --start-bk-clr: hsla(0, 0%, 0%, 0.8);
+  --start-btn-bk-clr: hsl(165, 83%, 37%);
+
+  // TEXT CLR
+  --start-btn-txt-clr: #fff;
+
+  // BLACK & WHITE
+  --white-clr: #fff;
+  --black-clr: #000;
+
+  // Z-INDEX
+  --area-after-index: 25;
+  --area-before-index: 50;
+  --start-index: 200;
+  --ball-index: 100;
+}
+
+body {
+  min-height: 100dvh;
+  position: relative;
+  isolation: isolate;
+  font-family: "Roboto", sans-serif;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}

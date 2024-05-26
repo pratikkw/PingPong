@@ -1,0 +1,14 @@
+{
+  "name": "12__pingpong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile-sass": "node-sass SASS/main.scss CSS/style.css -w"
+  },
+  "author": "pratik kesharwani",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  }
+}
