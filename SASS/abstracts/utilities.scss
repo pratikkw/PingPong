@@ -1,7 +1,17 @@
+.container--primary {
+  max-width: 1300px;
+  width: 100%;
+  margin-inline: auto;
+}
+
 .hide {
   display: none;
 }
 
 .start--opacity {
+  opacity: 0;
+}
+
+.score--opacity {
   opacity: 0;
 }

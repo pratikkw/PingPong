@@ -7,12 +7,14 @@ const magnetBtn = document.getElementById("magnet__btn");
 const magnetTxt = document.getElementById("magnet__txt");
 
 const ball = new Ball(document.querySelector(".ball"));
+const ballSec = new Ball(document.querySelector(".showcase__ball"));
 const playerPaddle = new Paddle(document.querySelector(".paddle__user"));
 const computerPaddle = new Paddle(document.querySelector(".paddle__computer"));
 const playerScore = document.querySelector(".score__player");
 const computerScore = document.querySelector(".score__computer");
 
 let lastTime;
+let lastTimeSecond;
 
 const updateBall = function (time) {
   if (lastTime != null) {
@@ -27,6 +29,16 @@ const updateBall = function (time) {
   window.requestAnimationFrame(updateBall);
 };
 
+const showcaseBallUpdate = function (time) {
+  if (lastTimeSecond != null) {
+    const delta = time - lastTimeSecond;
+    ballSec.updateSec(delta);
+  }
+
+  lastTimeSecond = time;
+  window.requestAnimationFrame(showcaseBallUpdate);
+};
+
 function isLose() {
   const rect = ball.rect();
   return rect.top <= 0 || rect.bottom >= window.innerHeight;
@@ -35,15 +47,15 @@ function isLose() {
 function handleLose() {
   const rect = ball.rect();
   if (rect.bottom >= window.innerHeight) {
+    computerScore.textContent =
+      parseInt(computerScore.textContent) < 10
+        ? `0${parseInt(computerScore.textContent) + 1}`
+        : parseInt(computerScore.textContent) + 1;
+  } else {
     playerScore.textContent =
       parseInt(playerScore.textContent) < 10
         ? `0${parseInt(playerScore.textContent) + 1}`
         : parseInt(playerScore.textContent) + 1;
-  } else {
-    computerScore =
-      parseInt(computerScore.textContent) < 10
-        ? `0${parseInt(computerScore.textContent) + 1}`
-        : parseInt(computerScore.textContent) + 1;
   }
   ball.reset();
   computerPaddle.reset();
@@ -98,7 +110,7 @@ const activeHoveFeatures = function () {
 
 window.addEventListener("load", function () {
   activeHoveFeatures();
-  window.requestAnimationFrame(updateBall);
+  window.requestAnimationFrame(showcaseBallUpdate);
 });
 
 window.addEventListener("resize", activeHoveFeatures);
@@ -108,12 +120,20 @@ magnetBtn.addEventListener("click", function () {
   setInterval(() => {
     startSection.style.display = "none";
   }, 1000);
+
+  window.requestAnimationFrame(updateBall);
+  ballSec.ballElem.style.display = "none";
+  playerScore.classList.remove("score--opacity");
+  computerScore.classList.remove("score--opacity");
 });
 
-document.addEventListener("keydown", function (e) {
-  if (e.key == "ArrowLeft") {
-    playerPaddle.movePaddle(-2);
-  } else if (e.key == "ArrowRight") {
-    playerPaddle.movePaddle(2);
+gameArea.addEventListener("mousemove", function (e) {
+  const eleWidth = Math.ceil(playerPaddle.paddleElem.offsetWidth / 2);
+  if (e.x <= eleWidth + 5) {
+    return;
+  } else if (e.x >= window.innerWidth - eleWidth - 5) {
+    return;
+  } else {
+    playerPaddle.position = (e.x / window.innerWidth) * 100;
   }
 });

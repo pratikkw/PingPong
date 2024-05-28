@@ -1,0 +1,41 @@
+.help {
+  position: absolute;
+  inset: 0;
+  z-index: var(--help-index);
+  color: #fff;
+  overflow-y: scroll;
+
+  background-image: radial-gradient(#616161 0.5px, transparent 0.5px),
+    radial-gradient(#616161 0.5px, #000000 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+
+  padding: 2rem 1.5rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__container {
+    & > h1 {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+
+    .txt__box {
+      gap: 1rem;
+
+      &:not(:last-child) {
+        margin-bottom: 3.5rem;
+      }
+    }
+
+    .lists > li:not(:last-child) {
+      margin-bottom: 0.75rem;
+    }
+
+    .list {
+      list-style-type: decimal;
+    }
+  }
+}

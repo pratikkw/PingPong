@@ -25,12 +25,14 @@ export default class Paddle {
   }
 
   update(delta, ballWidth) {
-    this.position += SPEED * delta * (ballWidth - this.position);
-  }
+    const direction = ballWidth - this.position;
 
-  movePaddle(val) {
-    if (this.rect().left <= 0 && val < 0) return;
-    if (this.rect().right >= window.innerWidth && val > 0) return;
-    this.position += val;
+    if (this.rect().right >= window.innerWidth - 5 && direction > 0) {
+      this.position += 0;
+    } else if (this.rect().left <= 5 && direction < 0) {
+      this.position += 0;
+    } else {
+      this.position += SPEED * delta * (ballWidth - this.position);
+    }
   }
 }

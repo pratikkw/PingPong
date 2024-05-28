@@ -1,0 +1,48 @@
+.start {
+  // TOP, LEFT, RIGHT & BOTTOM
+  --start-help-top: 1.25rem;
+  --start-help-right: 1.25rem;
+
+  // FONT
+  --help-icon-fs: 2.5rem;
+  --start-btn-fs: 4rem;
+
+  // WIDTH & HEIGHT
+  --start-btn-width: 16rem;
+  --start-btn-height: 16rem;
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--start-index);
+
+  display: grid;
+  place-items: center;
+  background-color: var(--start-bk-clr);
+
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+
+  &__help {
+    cursor: pointer;
+    position: absolute;
+    top: var(--start-help-top);
+    right: var(--start-help-right);
+
+    .help__icon {
+      color: var(--white-clr);
+      font-size: var(--help-icon-fs);
+    }
+  }
+
+  &__btn {
+    font-size: var(--start-btn-fs);
+    border-radius: 50%;
+    width: var(--start-btn-width);
+    height: var(--start-btn-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+}

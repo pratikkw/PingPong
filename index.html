@@ -37,26 +37,75 @@
     <script src="JS/script.js" type="module"></script>
   </head>
   <body>
-    <main class="main">
-      <!-- START -->
-      <section class="start">
-        <span class="start__help"
-          ><ion-icon class="help__icon" name="help-circle-outline"></ion-icon
-        ></span>
-        <button class="start__btn" id="magnet__btn">
-          <span id="magnet__txt">Start</span>
-        </button>
-      </section>
+    <!-- START -->
+    <section class="start">
+      <span class="start__help"
+        ><ion-icon class="help__icon" name="help-circle-outline"></ion-icon
+      ></span>
+      <button class="start__btn" id="magnet__btn">
+        <span id="magnet__txt">Start</span>
+      </button>
+    </section>
 
+    <section class="help hide">
+      <div class="help__container container--primary">
+        <h1 class="primary--title">Pong</h1>
+        <div class="txt__box grid">
+          <span class="txtbox--primary-title">General Rule</span>
+          <ul class="lists">
+            <li class="list">
+              The objective of the Pong game is to score points by hitting the
+              ball past your opponent's paddle.
+            </li>
+            <li class="list">
+              The game begins with the ball in the center of the screen.
+            </li>
+            <li class="list">
+              A point is scored when the ball passes beyond a player’s paddle
+              and reaches the edge of the screen behind them.
+            </li>
+            <li class="list">
+              The game restarts with the ball in the center after each point is
+              scored.
+            </li>
+            <li class="list">
+              The game continues until a player reaches the predetermined number
+              of points.
+            </li>
+          </ul>
+        </div>
+
+        <div class="txt__box grid">
+          <span class="txtbox--primary-title">How to play</span>
+          <ul class="lists">
+            <li class="list">
+              Move your mouse left or right to control the horizontal movement
+              of your paddle.
+            </li>
+            <li class="list">
+              When the ball makes contact with your paddle, it will bounce back
+              into the play area.
+            </li>
+            <li class="list">
+              The player who reaches the 10 number of points first wins the
+              game.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <main class="main">
       <!-- GAME AREA -->
       <section class="area">
-        <div class="score score__computer">
+        <div class="score score__computer score--opacity">
           <span class="point point__computer">00</span>
         </div>
         <div class="paddle paddle__computer"></div>
         <div class="ball"></div>
+        <div class="showcase__ball"></div>
         <div class="paddle paddle__user"></div>
-        <div class="score score__player">
+        <div class="score score__player score--opacity">
           <span class="point point__player">00</span>
         </div>
       </section>
