@@ -37,9 +37,9 @@
     <script src="JS/script.js" type="module"></script>
   </head>
   <body>
-    <span class="icon__btn help__btn"
-      ><ion-icon class="icon help__icon" name="help-circle-outline"></ion-icon
-    ></span>
+    <span class="icon__btn help__btn">
+      <ion-icon class="icon help__icon" name="help-circle-outline"></ion-icon>
+    </span>
 
     <span class="icon__btn close__btn close__btn--hide">
       <ion-icon class="icon close__icon" name="close-circle-outline"></ion-icon>
@@ -102,6 +102,25 @@
     <main class="main">
       <!-- GAME AREA -->
       <section class="area">
+        <div class="area__setting flex area__setting--opacity">
+          <span class="icon__btn reset__btn">
+            <ion-icon
+              class="icon reset__icon"
+              name="refresh-outline"
+            ></ion-icon>
+          </span>
+          <span class="icon__btn pause__btn">
+            <ion-icon
+              class="icon pause__icon"
+              name="pause-circle-outline"
+            ></ion-icon>
+
+            <ion-icon
+              class="icon play__icon play__icon--hide"
+              name="play-circle-outline"
+            ></ion-icon>
+          </span>
+        </div>
         <div class="score score__computer score--opacity">
           <span class="point point__computer">00</span>
         </div>

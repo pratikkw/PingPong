@@ -1,12 +1,14 @@
 import Ball from "./ball.js";
 import Paddle from "./paddle.js";
 
-const helpBtn = document.querySelector(".help__btn");
-const closeBtn = document.querySelector(".close__btn");
 const helpSection = document.querySelector(".help");
-const instructions = document.querySelectorAll(".lists");
 const startSection = document.querySelector(".start");
 const gameArea = document.querySelector(".area");
+const settingBtns = document.querySelector(".area__setting");
+
+const helpBtn = document.querySelector(".help__btn");
+const closeBtn = document.querySelector(".close__btn");
+const instructions = document.querySelectorAll(".lists");
 const magnetBtn = document.getElementById("magnet__btn");
 const magnetTxt = document.getElementById("magnet__txt");
 
@@ -21,11 +23,11 @@ let lastTime;
 let lastTimeSecond;
 
 // INITIAL SETUP
-const tl = gsap.timeline({ duration: 0.5 });
+const tl = gsap.timeline();
 
 gsap.set(instructions, {
   opacity: 0,
-  x: 200,
+  x: 400,
 });
 // ------------------------------
 
@@ -131,6 +133,8 @@ window.addEventListener("resize", activeHoveFeatures);
 magnetBtn.addEventListener("click", function () {
   helpBtn.classList.add("help--hide");
   startSection.classList.toggle("start--opacity");
+  settingBtns.classList.toggle("area__setting--opacity");
+
   setInterval(() => {
     startSection.style.display = "none";
   }, 1000);
@@ -158,7 +162,7 @@ helpBtn.addEventListener("click", function () {
   closeBtn.classList.remove("close__btn--hide");
 
   instructions.forEach((item) =>
-    tl.to(item, { opacity: 1, x: 0, ease: "power1.out" })
+    tl.to(item, { opacity: 1, x: 0, duration: 0.75, ease: "power1.out" })
   );
 });
 
@@ -168,6 +172,6 @@ closeBtn.addEventListener("click", function () {
   helpBtn.classList.remove("help__btn--hide");
 
   instructions.forEach((item) => {
-    tl.to(item, { opacity: 0, x: 200, ease: "power1.out" });
+    tl.to(item, { opacity: 0, x: 400, duration: 0, ease: "power1.out" });
   });
 });

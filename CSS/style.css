@@ -98,11 +98,21 @@ body {
   --ball-width: 1.75rem;
   --paddle-computer-top: 1vh;
   --paddle-user-bottom: 1vh;
+  --setting-top: 1.25rem;
+  --setting-right: 1.25rem;
   --score-fs: 1.75rem;
+  --setting-icons-fs: 2.25rem;
   height: var(--area-height);
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden; }
+  .area .area__setting {
+    position: absolute;
+    top: var(--setting-top);
+    right: var(--setting-right); }
+  .area .reset__icon,
+  .area .pause__icon {
+    font-size: var(--setting-icons-fs); }
   .area::after {
     content: "";
     display: block;
@@ -253,6 +263,9 @@ body {
 .score--opacity {
   opacity: 0; }
 
+.area__setting--opacity {
+  opacity: 0; }
+
 .help--hide {
   display: none; }
 
@@ -260,6 +273,12 @@ body {
   display: none; }
 
 .close__btn--hide {
+  display: none; }
+
+.play__icon--hide {
+  display: none; }
+
+.pause__icon--hide {
   display: none; }
 
 @media only screen and (hover: hover) {
@@ -308,7 +327,12 @@ body {
     --start-btn-width: 14rem;
     --start-btn-height: 14rem; }
   .area {
-    --score-fs: 1.5rem; } }
+    --score-fs: 1.5rem;
+    --setting-top: 1.5rem;
+    --setting-right: 1.5rem; }
+    .area__setting {
+      flex-direction: column;
+      gap: 0.5rem; } }
 
 @media only screen and (max-width: 500px) {
   :root {
@@ -328,7 +352,8 @@ body {
   .area {
     --paddle-width: 6rem;
     --ball-width: 1.125rem;
-    --area-before-width: 14rem; } }
+    --area-before-width: 14rem;
+    --setting-icons-fs: 1.75rem; } }
 
 @media only screen and (max-width: 350px) {
   .area {

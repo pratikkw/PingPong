@@ -76,6 +76,15 @@
   .area {
     // FONT
     --score-fs: 1.5rem;
+
+    // TOP, LEFT, RIGHT & BOTTOM
+    --setting-top: 1.5rem;
+    --setting-right: 1.5rem;
+
+    &__setting {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 }
 
@@ -112,6 +121,9 @@
     --paddle-width: 6rem;
     --ball-width: 1.125rem;
     --area-before-width: 14rem;
+
+    // FONT
+    --setting-icons-fs: 1.75rem;
   }
 }
 

@@ -16,6 +16,10 @@
   opacity: 0;
 }
 
+.area__setting--opacity {
+  opacity: 0;
+}
+
 .help--hide {
   display: none;
 }
@@ -25,5 +29,13 @@
 }
 
 .close__btn--hide {
+  display: none;
+}
+
+.play__icon--hide {
+  display: none;
+}
+
+.pause__icon--hide {
   display: none;
 }

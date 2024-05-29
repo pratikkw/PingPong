@@ -27,14 +27,28 @@
   // TOP, LEFT, RIGHT & BOTTOM
   --paddle-computer-top: 1vh;
   --paddle-user-bottom: 1vh;
+  --setting-top: 1.25rem;
+  --setting-right: 1.25rem;
 
   // FONT
   --score-fs: 1.75rem;
+  --setting-icons-fs: 2.25rem;
 
   height: var(--area-height);
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden;
+
+  .area__setting {
+    position: absolute;
+    top: var(--setting-top);
+    right: var(--setting-right);
+  }
+
+  .reset__icon,
+  .pause__icon {
+    font-size: var(--setting-icons-fs);
+  }
 
   &::after {
     content: "";
