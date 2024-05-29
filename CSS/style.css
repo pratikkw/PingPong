@@ -204,13 +204,11 @@ body {
   inset: 0;
   z-index: var(--help-index);
   color: var(--help-txts-clr);
-  overflow-y: scroll;
+  overflow-x: hidden;
   background-image: radial-gradient(#616161 0.5px, transparent 0.5px), radial-gradient(#616161 0.5px, #000000 0.5px);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
   padding: var(--help-padding); }
-  .help::-webkit-scrollbar {
-    display: none; }
   .help__container > h1 {
     text-align: center;
     margin-bottom: var(--pri-ttl-mg-bttm); }
