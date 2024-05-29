@@ -214,6 +214,7 @@ body {
   inset: 0;
   z-index: var(--help-index);
   color: var(--help-txts-clr);
+  min-height: 100dvh;
   overflow-x: hidden;
   background-image: radial-gradient(#616161 0.5px, transparent 0.5px), radial-gradient(#616161 0.5px, #000000 0.5px);
   background-size: 20px 20px;
@@ -328,11 +329,11 @@ body {
     --start-btn-height: 14rem; }
   .area {
     --score-fs: 1.5rem;
-    --setting-top: 1.5rem;
+    --setting-top: 2rem;
     --setting-right: 1.5rem; }
     .area__setting {
       flex-direction: column;
-      gap: 0.5rem; } }
+      gap: 1rem; } }
 
 @media only screen and (max-width: 500px) {
   :root {

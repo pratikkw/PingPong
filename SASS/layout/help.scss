@@ -15,6 +15,7 @@
   inset: 0;
   z-index: var(--help-index);
   color: var(--help-txts-clr);
+  min-height: 100dvh;
   overflow-x: hidden;
 
   background-image: radial-gradient(#616161 0.5px, transparent 0.5px),

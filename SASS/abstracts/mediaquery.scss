@@ -78,12 +78,12 @@
     --score-fs: 1.5rem;
 
     // TOP, LEFT, RIGHT & BOTTOM
-    --setting-top: 1.5rem;
+    --setting-top: 2rem;
     --setting-right: 1.5rem;
 
     &__setting {
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 1rem;
     }
   }
 }
