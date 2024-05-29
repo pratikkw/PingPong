@@ -210,11 +210,11 @@ body {
   --txt-box-mg-bttm: 3.5rem;
   --list-mg-bttm: 0.75rem;
   --txt-box-gap: 1.25rem;
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: var(--help-index);
   color: var(--help-txts-clr);
-  min-height: 100dvh;
+  min-height: 100lvh;
   overflow-x: hidden;
   background-image: radial-gradient(#616161 0.5px, transparent 0.5px), radial-gradient(#616161 0.5px, #000000 0.5px);
   background-size: 20px 20px;
