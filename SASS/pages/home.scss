@@ -1,3 +1,16 @@
+.help__btn,
+.close__btn {
+  position: absolute;
+  top: var(--help-icon-top);
+  right: var(--help-icon-right);
+  z-index: var(--help-icon-index);
+}
+
+.help__icon,
+.close__icon {
+  color: var(--white-clr);
+}
+
 .main {
   position: relative;
 }

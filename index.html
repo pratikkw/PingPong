@@ -37,17 +37,21 @@
     <script src="JS/script.js" type="module"></script>
   </head>
   <body>
+    <span class="icon__btn help__btn"
+      ><ion-icon class="icon help__icon" name="help-circle-outline"></ion-icon
+    ></span>
+
+    <span class="icon__btn close__btn close__btn--hide">
+      <ion-icon class="icon close__icon" name="close-circle-outline"></ion-icon>
+    </span>
     <!-- START -->
     <section class="start">
-      <span class="start__help"
-        ><ion-icon class="help__icon" name="help-circle-outline"></ion-icon
-      ></span>
       <button class="start__btn" id="magnet__btn">
         <span id="magnet__txt">Start</span>
       </button>
     </section>
 
-    <section class="help hide">
+    <section class="help help--hide">
       <div class="help__container container--primary">
         <h1 class="primary--title">Pong</h1>
         <div class="txt__box grid">

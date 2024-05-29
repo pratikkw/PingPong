@@ -35,6 +35,13 @@
 }
 
 @media only screen and (max-width: 1000px) {
+  :root {
+    // FONT
+    --primary-title-fs: 4rem;
+    --txtbox-primary-title-fs: 2rem;
+    --list-fs: 1.125rem;
+  }
+
   .area {
     --ball-width: 1.5rem;
     --area-before-width: 17rem;
@@ -42,13 +49,23 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .start {
-    // TOP, LEFT, RIGHT & BOTTOM
-    --start-help-top: 0.75rem;
-    --start-help-right: 0.75rem;
-
+  :root {
     // FONT
-    --help-icon-fs: 2.25rem;
+    --general-icon-fs: 2.25rem;
+    --list-fs: 1.1rem;
+
+    // TOP, LEFT, RIGHT, BOTTOM
+    --help-icon-top: 1rem;
+    --help-icon-right: 1rem;
+  }
+
+  .help {
+    // MARGIN
+    --pri-ttl-mg-bttm: 3.75rem;
+  }
+
+  .start {
+    // FONT
     --start-btn-fs: 3rem;
 
     // WIDTH & HEIGHT
@@ -63,6 +80,25 @@
 }
 
 @media only screen and (max-width: 500px) {
+  :root {
+    --primary-title-fs: 3.5rem;
+    --txtbox-primary-title-fs: 1.75rem;
+    --list-fs: 1rem;
+  }
+
+  .help {
+    // PADDING
+    --help-padding: 1.5rem 1.25rem;
+    --lists-left-padding: 1.25rem;
+
+    // MARGIN
+    --pri-ttl-mg-bttm: 2.75rem;
+    --txt-box-mg-bttm: 2rem;
+
+    // GAP
+    --txt-box-gap: 1rem;
+  }
+
   .start {
     --start-btn-fs: 2.75rem;
 
@@ -82,7 +118,6 @@
 @media only screen and (max-width: 350px) {
   .area {
     --paddle-width: 5rem;
-    // --ball-width: 1rem;
     --area-before-width: 13rem;
   }
 }

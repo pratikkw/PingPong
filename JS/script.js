@@ -1,6 +1,10 @@
 import Ball from "./ball.js";
 import Paddle from "./paddle.js";
 
+const helpBtn = document.querySelector(".help__btn");
+const closeBtn = document.querySelector(".close__btn");
+const helpSection = document.querySelector(".help");
+const instructions = document.querySelectorAll(".lists");
 const startSection = document.querySelector(".start");
 const gameArea = document.querySelector(".area");
 const magnetBtn = document.getElementById("magnet__btn");
@@ -15,6 +19,15 @@ const computerScore = document.querySelector(".score__computer");
 
 let lastTime;
 let lastTimeSecond;
+
+// INITIAL SETUP
+const tl = gsap.timeline({ duration: 0.5 });
+
+gsap.set(instructions, {
+  opacity: 0,
+  x: 200,
+});
+// ------------------------------
 
 const updateBall = function (time) {
   if (lastTime != null) {
@@ -116,6 +129,7 @@ window.addEventListener("load", function () {
 window.addEventListener("resize", activeHoveFeatures);
 
 magnetBtn.addEventListener("click", function () {
+  helpBtn.classList.add("help--hide");
   startSection.classList.toggle("start--opacity");
   setInterval(() => {
     startSection.style.display = "none";
@@ -136,4 +150,24 @@ gameArea.addEventListener("mousemove", function (e) {
   } else {
     playerPaddle.position = (e.x / window.innerWidth) * 100;
   }
+});
+
+helpBtn.addEventListener("click", function () {
+  helpSection.classList.remove("help--hide");
+  this.classList.add("help__btn--hide");
+  closeBtn.classList.remove("close__btn--hide");
+
+  instructions.forEach((item) =>
+    tl.to(item, { opacity: 1, x: 0, ease: "power1.out" })
+  );
+});
+
+closeBtn.addEventListener("click", function () {
+  helpSection.classList.add("help--hide");
+  this.classList.add("close__btn--hide");
+  helpBtn.classList.remove("help__btn--hide");
+
+  instructions.forEach((item) => {
+    tl.to(item, { opacity: 0, x: 200, ease: "power1.out" });
+  });
 });

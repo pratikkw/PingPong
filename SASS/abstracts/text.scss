@@ -1,18 +1,22 @@
 .primary--title {
-  font-size: 4.5rem;
+  font-size: var(--primary-title-fs);
 }
 
 .txt__box {
 }
 
 .txtbox--primary-title {
-  font-size: 2.5rem;
+  font-size: var(--txtbox-primary-title-fs);
 }
 
 .lists {
 }
 
 .list {
-  font-size: 1.25rem;
+  font-size: var(--list-fs);
   line-height: 1.5;
+}
+
+.icon {
+  font-size: var(--general-icon-fs);
 }

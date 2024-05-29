@@ -53,6 +53,7 @@ textarea {
 
   // TEXT CLR
   --start-btn-txt-clr: #fff;
+  --help-txts-clr: #fff;
 
   // BLACK & WHITE
   --white-clr: #fff;
@@ -61,9 +62,20 @@ textarea {
   // Z-INDEX
   --area-after-index: 25;
   --area-before-index: 50;
+  --help-icon-index: 500;
   --help-index: 300;
   --start-index: 200;
   --ball-index: 100;
+
+  // FONT
+  --general-icon-fs: 2.5rem;
+  --primary-title-fs: 4.5rem;
+  --txtbox-primary-title-fs: 2.5rem;
+  --list-fs: 1.25rem;
+
+  // TOP, LEFT, RIGHT, BOTTOM
+  --help-icon-top: 1.25rem;
+  --help-icon-right: 1.25rem;
 }
 
 body {
