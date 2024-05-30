@@ -5,6 +5,9 @@ const helpSection = document.querySelector(".help");
 const startSection = document.querySelector(".start");
 const gameArea = document.querySelector(".area");
 const settingBtns = document.querySelector(".area__setting");
+const resetBtn = document.querySelector(".reset__btn");
+const pauseBtn = document.querySelector(".pause__btn");
+const playBtn = document.querySelector(".play__btn");
 
 const helpBtn = document.querySelector(".help__btn");
 const closeBtn = document.querySelector(".close__btn");
@@ -21,6 +24,8 @@ const computerScore = document.querySelector(".score__computer");
 
 let lastTime;
 let lastTimeSecond;
+let animationId;
+let ballXPosition, ballYPosition;
 
 // INITIAL SETUP
 const tl = gsap.timeline();
@@ -41,7 +46,7 @@ const updateBall = function (time) {
   }
 
   lastTime = time;
-  window.requestAnimationFrame(updateBall);
+  animationId = window.requestAnimationFrame(updateBall);
 };
 
 const showcaseBallUpdate = function (time) {
@@ -74,6 +79,11 @@ function handleLose() {
   }
   ball.reset();
   computerPaddle.reset();
+}
+
+function scoreReset() {
+  computerScore.textContent = "00";
+  playerScore.textContent = "00";
 }
 
 const moveBtn = function (e) {
@@ -174,4 +184,38 @@ closeBtn.addEventListener("click", function () {
   instructions.forEach((item) => {
     tl.to(item, { opacity: 0, x: 400, duration: 0, ease: "power1.out" });
   });
+});
+
+resetBtn.addEventListener("click", function () {
+  pauseBtn.classList.remove("pause__btn--hide");
+  playBtn.classList.add("play__btn--hide");
+  ball.reset();
+  computerPaddle.reset();
+  scoreReset();
+
+  if (animationId) {
+    return;
+  } else if (!animationId) {
+    lastTime = null;
+    animationId = window.requestAnimationFrame(updateBall);
+  }
+});
+
+playBtn.addEventListener("click", function () {
+  if (!animationId) {
+    pauseBtn.classList.remove("pause__btn--hide");
+    playBtn.classList.add("play__btn--hide");
+    // lastTime = performance.now();
+    lastTime = null;
+    animationId = window.requestAnimationFrame(updateBall);
+  }
+});
+
+pauseBtn.addEventListener("click", function () {
+  if (animationId) {
+    playBtn.classList.remove("play__btn--hide");
+    pauseBtn.classList.add("pause__btn--hide");
+    window.cancelAnimationFrame(animationId);
+    animationId = null;
+  }
 });

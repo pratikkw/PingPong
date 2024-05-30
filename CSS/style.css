@@ -111,7 +111,8 @@ body {
     top: var(--setting-top);
     right: var(--setting-right); }
   .area .reset__icon,
-  .area .pause__icon {
+  .area .pause__icon,
+  .area .play__icon {
     font-size: var(--setting-icons-fs); }
   .area::after {
     content: "";
@@ -275,10 +276,10 @@ body {
 .close__btn--hide {
   display: none; }
 
-.play__icon--hide {
+.play__btn--hide {
   display: none; }
 
-.pause__icon--hide {
+.pause__btn--hide {
   display: none; }
 
 @media only screen and (hover: hover) {
