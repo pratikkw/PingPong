@@ -138,7 +138,7 @@ const activeHoveFeatures = function () {
 const layoutFeatures = function () {
   const isHover = window.matchMedia("(hover:none)").matches;
   if (isHover) {
-    document.documentElement.style.setProperty("--game-layout", "90dvh 10dvh");
+    document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
     document.documentElement.style.setProperty("--controller-view", "block");
   }
 };
