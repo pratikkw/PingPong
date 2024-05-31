@@ -37,20 +37,24 @@
     <script src="JS/script.js" type="module"></script>
   </head>
   <body>
+    <!-- HELP BTN -->
     <span class="icon__btn help__btn">
       <ion-icon class="icon help__icon" name="help-circle-outline"></ion-icon>
     </span>
 
+    <!-- CLOSE BTN -->
     <span class="icon__btn close__btn close__btn--hide">
       <ion-icon class="icon close__icon" name="close-circle-outline"></ion-icon>
     </span>
-    <!-- START -->
+
+    <!-- START SECTION -->
     <section class="start">
       <button class="start__btn" id="magnet__btn">
         <span id="magnet__txt">Start</span>
       </button>
     </section>
 
+    <!-- HELP SECTION -->
     <section class="help help--hide">
       <div class="help__container container--primary">
         <h1 class="primary--title">Pong</h1>
@@ -134,6 +138,11 @@
           <span class="point point__player">00</span>
         </div>
       </section>
+      <div class="controller controller__player">
+        <div class="controller__line">
+          <span class="controller__bar"></span>
+        </div>
+      </div>
     </main>
   </body>
 </html>

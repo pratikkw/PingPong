@@ -57,7 +57,9 @@ textarea {
   --txtbox-primary-title-fs: 2.5rem;
   --list-fs: 1.25rem;
   --help-icon-top: 1.25rem;
-  --help-icon-right: 1.25rem; }
+  --help-icon-right: 1.25rem;
+  --game-layout: 100dvh;
+  --controller-view: none; }
 
 body {
   min-height: 100dvh;
@@ -87,10 +89,11 @@ body {
   color: var(--white-clr); }
 
 .main {
-  position: relative; }
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--game-layout); }
 
 .area {
-  --area-height: 100dvh;
   --area-after-height: 6px;
   --area-before-width: 22rem;
   --paddle-height: 1.5vh;
@@ -180,6 +183,29 @@ body {
     left: 0%;
     transform: translate(50%, 50%); }
 
+.controller {
+  background-color: var(--area-bk-clr);
+  position: relative;
+  border-top: 2px solid #000;
+  display: var(--controller-view); }
+  .controller__line {
+    width: 100vw;
+    height: 0.75vh;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    --left: 0px; }
+  .controller__bar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    left: var(--left);
+    transform: translate(-100%, -50%); }
+
 .start {
   --start-help-top: 1.25rem;
   --start-help-right: 1.25rem;
@@ -254,6 +280,13 @@ body {
   max-width: 1300px;
   width: 100%;
   margin-inline: auto; }
+
+.touch--version {
+  display: grid;
+  grid-template-rows: 90dvh 10dvh; }
+
+.controller--hide {
+  display: none; }
 
 .hide {
   display: none; }

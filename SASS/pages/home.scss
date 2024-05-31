@@ -13,11 +13,13 @@
 
 .main {
   position: relative;
+  display: grid;
+  grid-template-rows: var(--game-layout);
 }
 
 .area {
   // WIDTH & HEIGHT
-  --area-height: 100dvh;
+  // --area-height: 100dvh;
   --area-after-height: 6px;
   --area-before-width: 22rem;
   --paddle-height: 1.5vh;
@@ -134,5 +136,38 @@
     bottom: 45%;
     left: 0%;
     transform: translate(50%, 50%);
+  }
+}
+
+.controller {
+  background-color: var(--area-bk-clr);
+  position: relative;
+  border-top: 2px solid #000;
+  display: var(--controller-view);
+
+  &__player {
+  }
+
+  &__line {
+    width: 100vw;
+    height: 0.75vh;
+    background-color: #fff;
+
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+
+    --left: 0px;
+  }
+
+  &__bar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    left: var(--left);
+    transform: translate(-100%, -50%);
   }
 }

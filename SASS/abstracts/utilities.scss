@@ -4,6 +4,15 @@
   margin-inline: auto;
 }
 
+.touch--version {
+  display: grid;
+  grid-template-rows: 90dvh 10dvh;
+}
+
+.controller--hide {
+  display: none;
+}
+
 .hide {
   display: none;
 }

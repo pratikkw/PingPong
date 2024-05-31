@@ -4,6 +4,8 @@ import Paddle from "./paddle.js";
 const helpSection = document.querySelector(".help");
 const startSection = document.querySelector(".start");
 const gameArea = document.querySelector(".area");
+const gameLayout = document.querySelector(".game__layout");
+const controller = document.querySelector(".controller");
 const settingBtns = document.querySelector(".area__setting");
 const resetBtn = document.querySelector(".reset__btn");
 const pauseBtn = document.querySelector(".pause__btn");
@@ -133,12 +135,23 @@ const activeHoveFeatures = function () {
   }
 };
 
+const layoutFeatures = function () {
+  const isHover = window.matchMedia("(hover:none)").matches;
+  if (isHover) {
+    document.documentElement.style.setProperty("--game-layout", "90dvh 10dvh");
+    document.documentElement.style.setProperty("--controller-view", "block");
+  }
+};
+
 window.addEventListener("load", function () {
   activeHoveFeatures();
   window.requestAnimationFrame(showcaseBallUpdate);
 });
 
-window.addEventListener("resize", activeHoveFeatures);
+window.addEventListener("resize", function () {
+  layoutFeatures();
+  activeHoveFeatures();
+});
 
 magnetBtn.addEventListener("click", function () {
   helpBtn.classList.add("help--hide");
@@ -151,6 +164,7 @@ magnetBtn.addEventListener("click", function () {
 
   window.requestAnimationFrame(updateBall);
   ballSec.ballElem.style.display = "none";
+  layoutFeatures();
   playerScore.classList.remove("score--opacity");
   computerScore.classList.remove("score--opacity");
 });
