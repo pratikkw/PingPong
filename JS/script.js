@@ -1,5 +1,9 @@
+import Ball from "./ball.js";
+// import Paddle from "./paddle.js";
+
 // LAYOUT
 const main = document.querySelector(".main");
+const gameArea = document.querySelector(".area");
 const startSection = document.querySelector(".start");
 const instructionSection = document.querySelector(".help");
 
@@ -17,10 +21,19 @@ const computerScore = document.querySelector(".score__computer");
 const playerScore = document.querySelector(".score__player");
 
 // Global Variables
+const ball = new Ball(document.querySelector(".ball"));
+const secondBall = new Ball(document.querySelector(".showcase__ball"));
 const isHover = window.matchMedia("(hover: hover)").matches;
+let id;
+let idSec;
+let lastTime;
+let lastTimeTwo;
+
+console.log(ball);
 
 window.addEventListener("load", function () {
   isHoverFunction(isHover);
+  idSec = window.requestAnimationFrame(updateSecBall);
 });
 
 function isHoverFunction(h) {
@@ -28,6 +41,24 @@ function isHoverFunction(h) {
     magnetBtn.addEventListener("mousemove", moveBtn);
     magnetBtn.addEventListener("mouseleave", resetBtn);
   }
+}
+
+function updateBall(time) {
+  if (lastTime) {
+    const delta = time - lastTime;
+    ball.update(delta, gameArea);
+  }
+  lastTime = time;
+  id = window.requestAnimationFrame(updateBall);
+}
+
+function updateSecBall(time) {
+  if (lastTimeTwo) {
+    const delta = time - lastTimeTwo;
+    secondBall.updateDemoBall(delta, gameArea);
+  }
+  lastTimeTwo = time;
+  idSec = window.requestAnimationFrame(updateSecBall);
 }
 
 function moveBtn(e) {
@@ -70,6 +101,9 @@ function startGame() {
   settingBox.classList.remove("area__setting--opacity");
   playerScore.classList.remove("score--opacity");
   computerScore.classList.remove("score--opacity");
+  id = window.requestAnimationFrame(updateBall);
+  secondBall.ballEle.style.display = "none";
+  window.cancelAnimationFrame(idSec);
 
   if (isHover == false) {
     document.documentElement.style.setProperty("--game-layout", "88dvh 12dvh");
