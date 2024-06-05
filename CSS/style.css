@@ -51,6 +51,7 @@ textarea {
   --help-icon-index: 500;
   --help-index: 300;
   --start-index: 200;
+  --start-btn-index: 1;
   --ball-index: 100;
   --general-icon-fs: 2.5rem;
   --primary-title-fs: 4.5rem;
@@ -105,14 +106,14 @@ body {
   --setting-right: 1.25rem;
   --score-fs: 1.75rem;
   --setting-icons-fs: 2.25rem;
-  height: var(--area-height);
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden; }
   .area .area__setting {
     position: absolute;
     top: var(--setting-top);
-    right: var(--setting-right); }
+    right: var(--setting-right);
+    transition: opacity 0.3s ease-in; }
   .area .reset__icon,
   .area .pause__icon,
   .area .play__icon {
@@ -281,13 +282,6 @@ body {
   width: 100%;
   margin-inline: auto; }
 
-.touch--version {
-  display: grid;
-  grid-template-rows: 90dvh 10dvh; }
-
-.controller--hide {
-  display: none; }
-
 .hide {
   display: none; }
 
@@ -318,7 +312,9 @@ body {
 @media only screen and (hover: hover) {
   .start__btn {
     background-color: var(--black-clr);
-    color: var(--white-clr); }
+    color: var(--white-clr);
+    position: relative;
+    z-index: var(--start-btn-index); }
     .start__btn::after {
       content: "";
       position: absolute;

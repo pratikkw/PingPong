@@ -36,7 +36,7 @@
   --score-fs: 1.75rem;
   --setting-icons-fs: 2.25rem;
 
-  height: var(--area-height);
+  // height: var(--area-height);
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden;
@@ -45,6 +45,7 @@
     position: absolute;
     top: var(--setting-top);
     right: var(--setting-right);
+    transition: opacity 0.3s ease-in;
   }
 
   .reset__icon,

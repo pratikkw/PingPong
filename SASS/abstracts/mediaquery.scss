@@ -3,6 +3,8 @@
     &__btn {
       background-color: var(--black-clr);
       color: var(--white-clr);
+      position: relative;
+      z-index: var(--start-btn-index);
 
       &::after {
         content: "";
