@@ -50,9 +50,9 @@ export default class Ball {
       this.direction.x *= -1;
     }
 
-    if (rect.top <= 0 || rect.bottom >= area.offsetHeight) {
-      this.direction.y *= -1;
-    }
+    // if (rect.top <= 0 || rect.bottom >= area.offsetHeight) {
+    //   this.direction.y *= -1;
+    // }
   }
 
   updateDemoBall(delta, area) {

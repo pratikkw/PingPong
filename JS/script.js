@@ -13,12 +13,17 @@ const magnetBtnTxt = document.getElementById("magnet__txt");
 const helpBtn = document.querySelector(".help__btn");
 const closeBtn = document.querySelector(".close__btn");
 const settingBox = document.querySelector(".area__setting");
+const playBtn = document.querySelector(".play__btn");
+const pauseBtn = document.querySelector(".pause__btn");
+const restartBtn = document.querySelector(".reset__icon");
 
-// COMPONENTS
+// COMPONENTs
 const listFirst = document.querySelectorAll(".list__one");
 const listSecond = document.querySelectorAll(".list__two");
-const computerScore = document.querySelector(".score__computer");
 const playerScore = document.querySelector(".score__player");
+const computerScore = document.querySelector(".score__computer");
+const playerPoint = document.querySelector(".point__player");
+const computerPoint = document.querySelector(".point__computer");
 
 // Global Variables
 const ball = new Ball(document.querySelector(".ball"));
@@ -39,8 +44,29 @@ window.addEventListener("load", function () {
 function isHoverFunction(h) {
   if (h) {
     magnetBtn.addEventListener("mousemove", moveBtn);
-    magnetBtn.addEventListener("mouseleave", resetBtn);
+    magnetBtn.addEventListener("mouseleave", revertBtn);
   }
+}
+
+function isLose() {
+  const rect = ball.rect();
+  return rect.top <= 0 || rect.bottom >= gameArea.offsetHeight;
+}
+
+function scoreTable() {
+  const rect = ball.rect();
+  if (rect.top <= 0) {
+    playerPoint.textContent =
+      parseInt(playerPoint.textContent) < 9
+        ? `0${parseInt(playerPoint.textContent) + 1}`
+        : parseInt(playerPoint.textContent) + 1;
+  } else if (rect.bottom >= gameArea.offsetHeight) {
+    computerPoint.textContent =
+      parseInt(computerPoint.textContent) < 9
+        ? `0${parseInt(computerPoint.textContent) + 1}`
+        : parseInt(computerPoint.textContent) + 1;
+  }
+  ball.reset();
 }
 
 function updateBall(time) {
@@ -50,6 +76,8 @@ function updateBall(time) {
   }
   lastTime = time;
   id = window.requestAnimationFrame(updateBall);
+
+  if (isLose()) scoreTable();
 }
 
 function updateSecBall(time) {
@@ -59,6 +87,36 @@ function updateSecBall(time) {
   }
   lastTimeTwo = time;
   idSec = window.requestAnimationFrame(updateSecBall);
+}
+
+function play_And_pause() {
+  pauseBtn.classList.toggle("pause__btn--hide");
+  playBtn.classList.toggle("play__btn--hide");
+}
+
+function pauseBall() {
+  if (id) {
+    play_And_pause();
+    window.cancelAnimationFrame(id);
+    id = null;
+  }
+}
+
+function resumeBall() {
+  if (!id) {
+    play_And_pause();
+    lastTime = null;
+    id = window.requestAnimationFrame(updateBall);
+  }
+}
+
+function restartgame() {
+  ball.reset();
+  if (!id) {
+    lastTime = null;
+    id = window.requestAnimationFrame(updateBall);
+    play_And_pause();
+  }
 }
 
 function moveBtn(e) {
@@ -86,7 +144,7 @@ function moveBtn(e) {
   });
 }
 
-function resetBtn(e) {
+function revertBtn(e) {
   gsap.to(magnetBtn, { duration: 1, x: 0, y: 0, ease: "Elastic.easeOut" });
   gsap.to(magnetBtnTxt, { duration: 1, x: 0, y: 0, ease: "Elastic.easeOut" });
 }
@@ -108,6 +166,7 @@ function startGame() {
   if (isHover == false) {
     document.documentElement.style.setProperty("--game-layout", "88dvh 12dvh");
     document.documentElement.style.setProperty("--controller-view", "block");
+    ball.ballEle.style.transform = `translate(-50%, -200%)`;
   }
 }
 
@@ -150,6 +209,7 @@ function resetInstructionsAnim() {
 
 // EventListeners
 magnetBtn.addEventListener("click", startGame);
+
 helpBtn.addEventListener("click", function () {
   instructions();
   instructionsAnim();
@@ -159,3 +219,9 @@ closeBtn.addEventListener("click", function () {
   instructions();
   resetInstructionsAnim();
 });
+
+pauseBtn.addEventListener("click", pauseBall);
+
+playBtn.addEventListener("click", resumeBall);
+
+restartBtn.addEventListener("click", restartgame);
