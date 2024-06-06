@@ -24,6 +24,9 @@ const playerScore = document.querySelector(".score__player");
 const computerScore = document.querySelector(".score__computer");
 const playerPoint = document.querySelector(".point__player");
 const computerPoint = document.querySelector(".point__computer");
+const controllerBox = document.querySelector(".controller__player");
+const controllerLine = document.querySelector(".controller__line");
+const controllerBar = document.querySelector(".controller__bar");
 
 // Global Variables
 const ball = new Ball(document.querySelector(".ball"));
@@ -169,7 +172,7 @@ function startGame() {
   window.cancelAnimationFrame(idSec);
 
   if (isHover == false) {
-    document.documentElement.style.setProperty("--game-layout", "88dvh 12dvh");
+    document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
     document.documentElement.style.setProperty("--controller-view", "block");
     ball.ballEle.style.transform = `translate(-50%, -200%)`;
   }
@@ -240,4 +243,19 @@ document.addEventListener("keydown", function (e) {
     value += 2;
   }
   playerPaddle.updatePlayerPaddle(value, gameArea);
+});
+
+controllerBox.addEventListener("touchstart", function (e) {
+  e.preventDefault();
+});
+
+controllerBox.addEventListener("touchmove", function (e) {
+  e.preventDefault();
+  const t = e.targetTouches;
+  if (t.length == 1) {
+    const x = t[0].clientX;
+    const adjustedX = (x / gameArea.offsetWidth) * 100;
+    console.log(adjustedX);
+    controllerLine.style.setProperty("--left", adjustedX);
+  }
 });

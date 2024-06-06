@@ -196,7 +196,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translate(0%, -50%);
-    --left: 0; }
+    --left: 50; }
   .controller__bar {
     width: 1rem;
     height: 1rem;
@@ -204,8 +204,8 @@ body {
     background-color: #000;
     position: absolute;
     top: 50%;
-    left: var(--left);
-    transform: translate(-50%, -50%); }
+    left: calc(var(--left) * 1vw);
+    transform: translate(0%, -50%); }
 
 .start {
   --start-help-top: 1.25rem;
