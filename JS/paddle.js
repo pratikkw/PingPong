@@ -28,9 +28,9 @@ export default class Paddle {
     const rect = this.rect();
     const direction = ballWidth - this.position;
     if (rect.left <= 10 && direction <= 0) {
-      this.position += 0;
+      // this.position += 0;
     } else if (rect.right >= area.offsetWidth - 10 && direction >= 0) {
-      this.position += 0;
+      // this.position += 0;
     } else {
       this.position += SPEED * delta * (ballWidth - this.position);
     }
