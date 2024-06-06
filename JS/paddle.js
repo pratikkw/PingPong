@@ -39,9 +39,9 @@ export default class Paddle {
   updatePlayerPaddle(val, area) {
     const rect = this.rect();
     if (rect.left <= 10 && val <= 0) {
-      this.position += 0;
+      // this.position += 0;
     } else if (rect.right >= area.offsetWidth - 10 && val >= 0) {
-      this.position += 0;
+      // this.position += 0;
     } else {
       this.position += val;
     }
