@@ -35,10 +35,7 @@ let id;
 let idSec;
 let lastTime;
 let lastTimeTwo;
-
-console.log(ball);
-console.log(playerPaddle);
-console.log(computerPaddle);
+let controllerAccess = false;
 
 window.addEventListener("load", function () {
   isHoverFunction(isHover);
@@ -162,6 +159,7 @@ function startGame() {
     startSection.style.display = "none";
   }, 320);
 
+  controllerAccess = true;
   helpBtn.classList.add("help__btn--hide");
   settingBox.classList.remove("area__setting--opacity");
   playerScore.classList.remove("score--opacity");
@@ -235,6 +233,7 @@ restartBtn.addEventListener("click", restartgame);
 
 document.addEventListener("keydown", function (e) {
   let value = 0;
+  if (!controllerAccess) return;
   if (e.key == "ArrowLeft") {
     value -= 2;
   } else if (e.key == "ArrowRight") {
