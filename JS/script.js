@@ -1,5 +1,5 @@
 import Ball from "./ball.js";
-// import Paddle from "./paddle.js";
+import Paddle from "./paddle.js";
 
 // LAYOUT
 const main = document.querySelector(".main");
@@ -28,6 +28,8 @@ const computerPoint = document.querySelector(".point__computer");
 // Global Variables
 const ball = new Ball(document.querySelector(".ball"));
 const secondBall = new Ball(document.querySelector(".showcase__ball"));
+const playerPaddle = new Paddle(document.querySelector(".paddle__user"));
+const computerPaddle = new Paddle(document.querySelector(".paddle__computer"));
 const isHover = window.matchMedia("(hover: hover)").matches;
 let id;
 let idSec;
@@ -35,6 +37,8 @@ let lastTime;
 let lastTimeTwo;
 
 console.log(ball);
+console.log(playerPaddle);
+console.log(computerPaddle);
 
 window.addEventListener("load", function () {
   isHoverFunction(isHover);
@@ -67,17 +71,19 @@ function scoreTable() {
         : parseInt(computerPoint.textContent) + 1;
   }
   ball.reset();
+  computerPaddle.reset();
 }
 
 function updateBall(time) {
   if (lastTime) {
     const delta = time - lastTime;
-    ball.update(delta, gameArea);
+    ball.update(delta, gameArea, [playerPaddle.rect(), computerPaddle.rect()]);
+    computerPaddle.updateComputer(delta, ball.x, gameArea);
+
+    if (isLose()) scoreTable();
   }
   lastTime = time;
   id = window.requestAnimationFrame(updateBall);
-
-  if (isLose()) scoreTable();
 }
 
 function updateSecBall(time) {
@@ -112,6 +118,7 @@ function resumeBall() {
 
 function restartgame() {
   ball.reset();
+  computerPaddle.reset();
   if (!id) {
     lastTime = null;
     id = window.requestAnimationFrame(updateBall);
@@ -225,3 +232,13 @@ pauseBtn.addEventListener("click", pauseBall);
 playBtn.addEventListener("click", resumeBall);
 
 restartBtn.addEventListener("click", restartgame);
+
+document.addEventListener("keydown", function (e) {
+  let value = 0;
+  if (e.key == "ArrowLeft") {
+    value -= 2;
+  } else if (e.key == "ArrowRight") {
+    value += 2;
+  }
+  playerPaddle.updatePlayerPaddle(value, gameArea);
+});

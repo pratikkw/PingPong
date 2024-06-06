@@ -41,7 +41,7 @@ export default class Ball {
     this.velocity = INITIAL_VELOCITY;
   }
 
-  update(delta, area) {
+  update(delta, area, arr) {
     this.x += this.direction.x * this.velocity * delta;
     this.y += this.direction.y * this.velocity * delta;
     const rect = this.rect();
@@ -50,9 +50,9 @@ export default class Ball {
       this.direction.x *= -1;
     }
 
-    // if (rect.top <= 0 || rect.bottom >= area.offsetHeight) {
-    //   this.direction.y *= -1;
-    // }
+    if (arr.some((r) => isCollision(rect, r))) {
+      this.direction.y *= -1;
+    }
   }
 
   updateDemoBall(delta, area) {
@@ -72,4 +72,13 @@ export default class Ball {
 
 function randomNumberBetween(min, max) {
   return Math.random() * (max - min) + min;
+}
+
+function isCollision(ball, paddle) {
+  return (
+    paddle.left <= ball.right &&
+    paddle.right >= ball.left &&
+    paddle.top <= ball.bottom &&
+    paddle.bottom >= ball.top
+  );
 }
