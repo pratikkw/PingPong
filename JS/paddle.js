@@ -56,6 +56,7 @@ export default class Paddle {
       bar.style.transform = "translate(-100%, -50%)";
     } else {
       this.position = val;
+      bar.style.transform = "translate(-50%, -50%)";
     }
   }
 }
