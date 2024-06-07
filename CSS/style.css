@@ -185,6 +185,7 @@ body {
     transform: translate(50%, 50%); }
 
 .controller {
+  --controller-bar-width: 3.5rem;
   background-color: var(--area-bk-clr);
   position: relative;
   border-top: 2px solid #000;
@@ -200,11 +201,9 @@ body {
     transform: translate(-50%, -50%);
     --left: 50; }
   .controller__bar {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    pointer-events: none;
-    background-color: #000;
+    width: var(--controller-bar-width);
+    aspect-ratio: 1/1;
+    background-color: var(--area-bk-clr);
     position: absolute;
     top: 50%;
     left: calc(var(--left) * 1%);
@@ -387,7 +386,9 @@ body {
     --paddle-width: 6rem;
     --ball-width: 1.125rem;
     --area-before-width: 14rem;
-    --setting-icons-fs: 1.75rem; } }
+    --setting-icons-fs: 1.75rem; }
+  .controller {
+    --controller-bar-width: 3rem; } }
 
 @media only screen and (max-width: 350px) {
   .area {

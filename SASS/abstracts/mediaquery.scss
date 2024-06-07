@@ -127,6 +127,11 @@
     // FONT
     --setting-icons-fs: 1.75rem;
   }
+
+  .controller {
+    // WIDTH & HEIGHT
+    --controller-bar-width: 3rem;
+  }
 }
 
 @media only screen and (max-width: 350px) {

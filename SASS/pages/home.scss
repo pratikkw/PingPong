@@ -141,6 +141,9 @@
 }
 
 .controller {
+  // WIDTH & HEIGHT
+  --controller-bar-width: 3.5rem;
+
   background-color: var(--area-bk-clr);
   position: relative;
   border-top: 2px solid #000;
@@ -164,12 +167,10 @@
   }
 
   &__bar {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 50%;
-    pointer-events: none;
+    width: var(--controller-bar-width);
+    aspect-ratio: 1/1;
+    background-color: var(--area-bk-clr);
 
-    background-color: #000;
     position: absolute;
     top: 50%;
     left: calc(var(--left) * 1%);

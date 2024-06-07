@@ -245,18 +245,18 @@ document.addEventListener("keydown", function (e) {
   playerPaddle.updatePlayerPaddle(value, gameArea);
 });
 
-controllerLine.addEventListener("touchstart", function (e) {
+controllerBar.addEventListener("touchstart", function (e) {
   e.preventDefault();
 });
 
-controllerLine.addEventListener("touchmove", function (e) {
+controllerBar.addEventListener("touchmove", function (e) {
   e.preventDefault();
 
   const t = e.targetTouches;
   if (t.length == 1) {
     const details = t[0];
     const distanceFromBorder = details.clientX;
-    const gapBetweenBorder = details.target.getBoundingClientRect().left;
+    const gapBetweenBorder = controllerLine.getBoundingClientRect().left;
     const diff = distanceFromBorder - gapBetweenBorder;
     if (diff >= 0 && diff <= controllerLine.offsetWidth) {
       const adjustedX = Math.ceil((diff / controllerLine.offsetWidth) * 100);
