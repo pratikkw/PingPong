@@ -45,6 +45,16 @@ window.addEventListener("load", function () {
   idSec = window.requestAnimationFrame(updateSecBall);
 });
 
+document.addEventListener(
+  "touchmove",
+  function (event) {
+    if (event.scale !== 1) {
+      event.preventDefault();
+    }
+  },
+  { passive: false }
+);
+
 function isHoverFunction(h) {
   if (h) {
     magnetBtn.addEventListener("mousemove", moveBtn);
@@ -119,6 +129,8 @@ function resumeBall() {
 function restartgame() {
   ball.reset();
   computerPaddle.reset();
+  playerScore.textContent = "00";
+  computerScore.textContent = "00";
   if (!id) {
     lastTime = null;
     id = window.requestAnimationFrame(updateBall);
@@ -174,7 +186,7 @@ function startGame() {
   if (isHover == false) {
     document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
     document.documentElement.style.setProperty("--controller-view", "block");
-    ball.ballEle.style.transform = `translate(-50%, -200%)`;
+    ball.ballEle.style.transform = `translate(-50%, -50%)`;
   }
 }
 
