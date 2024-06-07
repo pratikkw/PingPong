@@ -45,15 +45,15 @@ window.addEventListener("load", function () {
   idSec = window.requestAnimationFrame(updateSecBall);
 });
 
-// document.addEventListener(
-//   "touchmove",
-//   function (event) {
-//     if (event.scale !== 1) {
-//       event.preventDefault();
-//     }
-//   },
-//   { passive: false }
-// );
+main.addEventListener(
+  "touchmove",
+  function (event) {
+    if (event.scale !== 1) {
+      event.preventDefault();
+    }
+  },
+  { passive: false }
+);
 
 function isHoverFunction(h) {
   if (h) {
