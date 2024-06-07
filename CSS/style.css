@@ -28,7 +28,8 @@ button {
   background: none;
   outline: none;
   border: none;
-  font: inherit; }
+  font: inherit;
+  -webkit-tap-highlight-color: transparent; }
 
 input,
 label,
@@ -77,6 +78,9 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem; }
+
+.icon__btn {
+  -webkit-tap-highlight-color: transparent; }
 
 .help__btn,
 .close__btn {
@@ -166,8 +170,8 @@ body {
   z-index: var(--ball-index);
   background-color: var(--white-clr);
   position: absolute;
-  top: calc(var(--y) * 1vh);
-  left: calc(var(--x) * 1vw);
+  top: calc(var(--y) * 1%);
+  left: calc(var(--x) * 1%);
   transform: translate(-50%, -50%); }
 
 .score {
@@ -246,10 +250,13 @@ body {
   z-index: var(--help-index);
   color: var(--help-txts-clr);
   overflow-x: hidden;
+  overflow-y: scroll;
   background-image: radial-gradient(#616161 0.5px, transparent 0.5px), radial-gradient(#616161 0.5px, #000000 0.5px);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
   padding: var(--help-padding); }
+  .help::-webkit-scrollbar {
+    display: none; }
   .help__container > h1 {
     text-align: center;
     margin-bottom: var(--pri-ttl-mg-bttm); }
@@ -388,7 +395,7 @@ body {
     --area-before-width: 14rem;
     --setting-icons-fs: 1.75rem; }
   .controller {
-    --controller-bar-width: 3rem; } }
+    --controller-bar-width: 3.25rem; } }
 
 @media only screen and (max-width: 350px) {
   .area {

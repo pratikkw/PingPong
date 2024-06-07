@@ -1,3 +1,7 @@
+.icon__btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .help__btn,
 .close__btn {
   position: absolute;
@@ -19,7 +23,6 @@
 
 .area {
   // WIDTH & HEIGHT
-  // --area-height: 100dvh;
   --area-after-height: 6px;
   --area-before-width: 22rem;
   --paddle-height: 1.5vh;
@@ -36,7 +39,6 @@
   --score-fs: 1.75rem;
   --setting-icons-fs: 2.25rem;
 
-  // height: var(--area-height);
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden;
@@ -116,8 +118,10 @@
   z-index: var(--ball-index);
   background-color: var(--white-clr);
   position: absolute;
-  top: calc(var(--y) * 1vh);
-  left: calc(var(--x) * 1vw);
+  // top: calc(var(--y) * 1vh);
+  // left: calc(var(--x) * 1vw);
+  top: calc(var(--y) * 1%);
+  left: calc(var(--x) * 1%);
   transform: translate(-50%, -50%);
 }
 

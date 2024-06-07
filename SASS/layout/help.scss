@@ -16,6 +16,7 @@
   z-index: var(--help-index);
   color: var(--help-txts-clr);
   overflow-x: hidden;
+  overflow-y: scroll;
 
   background-image: radial-gradient(#616161 0.5px, transparent 0.5px),
     radial-gradient(#616161 0.5px, #000000 0.5px);
@@ -23,6 +24,10 @@
   background-position: 0 0, 10px 10px;
 
   padding: var(--help-padding);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &__container {
     & > h1 {
