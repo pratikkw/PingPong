@@ -46,4 +46,16 @@ export default class Paddle {
       this.position += val;
     }
   }
+
+  updatePaddleForTouchDevice(val, bar, area) {
+    const rect = this.rect();
+
+    if (rect.left <= 10 && val < 15) {
+      bar.style.transform = "translate(0%, -50%)";
+    } else if (rect.right >= area.offsetWidth - 10 && val > 85) {
+      bar.style.transform = "translate(-100%, -50%)";
+    } else {
+      this.position = val;
+    }
+  }
 }

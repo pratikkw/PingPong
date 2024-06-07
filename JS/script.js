@@ -245,17 +245,27 @@ document.addEventListener("keydown", function (e) {
   playerPaddle.updatePlayerPaddle(value, gameArea);
 });
 
-controllerBox.addEventListener("touchstart", function (e) {
+controllerLine.addEventListener("touchstart", function (e) {
   e.preventDefault();
 });
 
-controllerBox.addEventListener("touchmove", function (e) {
+controllerLine.addEventListener("touchmove", function (e) {
   e.preventDefault();
+
   const t = e.targetTouches;
   if (t.length == 1) {
-    const x = t[0].clientX;
-    const adjustedX = (x / gameArea.offsetWidth) * 100;
-    console.log(adjustedX);
-    controllerLine.style.setProperty("--left", adjustedX);
+    const details = t[0];
+    const distanceFromBorder = details.clientX;
+    const gapBetweenBorder = details.target.getBoundingClientRect().left;
+    const diff = distanceFromBorder - gapBetweenBorder;
+    if (diff >= 0 && diff <= controllerLine.offsetWidth) {
+      const adjustedX = Math.ceil((diff / controllerLine.offsetWidth) * 100);
+      controllerLine.style.setProperty("--left", adjustedX);
+      playerPaddle.updatePaddleForTouchDevice(
+        adjustedX,
+        controllerBar,
+        gameArea
+      );
+    }
   }
 });
