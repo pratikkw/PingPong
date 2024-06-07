@@ -250,9 +250,9 @@ document.addEventListener("keydown", function (e) {
   let value = 0;
   if (!controllerAccess) return;
   if (e.key == "ArrowLeft") {
-    value -= 2;
+    value -= 5;
   } else if (e.key == "ArrowRight") {
-    value += 2;
+    value += 5;
   }
   playerPaddle.updatePlayerPaddle(value, gameArea);
 });
