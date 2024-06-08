@@ -12,11 +12,11 @@
   opacity: 0;
 }
 
-.score--opacity {
-  opacity: 0;
+.start--hide {
+  display: none;
 }
 
-.area__setting--opacity {
+.score--opacity {
   opacity: 0;
 }
 
@@ -29,14 +29,6 @@
 }
 
 .close__btn--hide {
-  display: none;
-}
-
-.play__btn--hide {
-  display: none;
-}
-
-.pause__btn--hide {
   display: none;
 }
 

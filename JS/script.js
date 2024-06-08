@@ -129,6 +129,8 @@ function resumeBall() {
 function restartgame() {
   ball.reset();
   computerPaddle.reset();
+  playerPaddle.reset();
+  playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
   playerPoint.textContent = "00";
   computerPoint.textContent = "00";
   close_and_open_gameOption();
@@ -138,7 +140,36 @@ function restartgame() {
   }
 }
 
-function quiteGame() {}
+function quiteGame() {
+  // SMALL Elements
+  playerPoint.textContent = "00";
+  computerPoint.textContent = "00";
+  playerScore.classList.add("score--opacity");
+  computerScore.classList.add("score--opacity");
+  settingBtn.classList.add("setting__btn--opacity");
+  helpBtn.classList.remove("help__btn--hide");
+
+  // BALLs
+  ball.reset();
+  window.cancelAnimationFrame(id);
+  id = null;
+  lastTime = null;
+  secondBall.rect();
+  secondBall.ballEle.style = "block";
+  lastTimeTwo = null;
+  idSec = window.requestAnimationFrame(updateSecBall);
+
+  // PADDLE
+  controllerAccess = false;
+  computerPaddle.reset();
+  playerPaddle.reset();
+  playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
+
+  // SECTION
+  close_and_open_gameOption();
+  startSection.classList.remove("start--opacity");
+  startSection.classList.remove("start--hide");
+}
 
 function moveBtn(e) {
   const btnValue = 45;
@@ -173,7 +204,7 @@ function revertBtn(e) {
 function startGame() {
   startSection.classList.add("start--opacity");
   setTimeout(() => {
-    startSection.style.display = "none";
+    startSection.classList.add("start--hide");
   }, 320);
 
   controllerAccess = true;
@@ -188,7 +219,6 @@ function startGame() {
   if (isHover == false) {
     document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
     document.documentElement.style.setProperty("--controller-view", "block");
-    ball.ballEle.style.transform = `translate(-50%, -50%)`;
   }
 }
 
@@ -228,10 +258,6 @@ function resetInstructionsAnim() {
     duration: 0,
   });
 }
-
-// function gameOption() {
-//   gameOptionSection.classList.remove("setting--hide");
-// }
 
 // EventListeners
 magnetBtn.addEventListener("click", startGame);

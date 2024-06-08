@@ -49,19 +49,6 @@
     transition: opacity 0.3s ease-in;
   }
 
-  // .area__setting {
-  //   position: absolute;
-  //   top: var(--setting-top);
-  //   right: var(--setting-right);
-  //   transition: opacity 0.3s ease-in;
-  // }
-
-  // .reset__icon,
-  // .pause__icon,
-  // .play__icon {
-  //   font-size: var(--setting-icons-fs);
-  // }
-
   &::after {
     content: "";
     display: block;
