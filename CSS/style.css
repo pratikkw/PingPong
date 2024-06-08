@@ -49,9 +49,10 @@ textarea {
   --black-clr: #000;
   --area-after-index: 25;
   --area-before-index: 50;
-  --help-icon-index: 500;
-  --help-index: 300;
-  --start-index: 200;
+  --help-icon-index: 600;
+  --help-index: 500;
+  --start-index: 400;
+  --setting-index: 300;
   --start-btn-index: 1;
   --ball-index: 100;
   --general-icon-fs: 2.5rem;
@@ -109,19 +110,14 @@ body {
   --setting-top: 1.25rem;
   --setting-right: 1.25rem;
   --score-fs: 1.75rem;
-  --setting-icons-fs: 2.25rem;
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden; }
-  .area .area__setting {
+  .area .setting__btn {
     position: absolute;
     top: var(--setting-top);
     right: var(--setting-right);
     transition: opacity 0.3s ease-in; }
-  .area .reset__icon,
-  .area .pause__icon,
-  .area .play__icon {
-    font-size: var(--setting-icons-fs); }
   .area::after {
     content: "";
     display: block;
@@ -272,6 +268,21 @@ body {
   .help__container .list {
     list-style-type: decimal; }
 
+.setting {
+  --setting-btns-gap: 4rem;
+  --setting-icons-fs: 8rem;
+  position: fixed;
+  inset: 0;
+  z-index: var(--setting-index);
+  background-color: rgba(0, 0, 0, 0.825);
+  display: grid;
+  place-items: center; }
+  .setting__btns {
+    gap: var(--setting-btns-gap); }
+    .setting__btns .icon {
+      font-size: var(--setting-icons-fs);
+      color: var(--white-clr); }
+
 .icon__btn {
   cursor: pointer; }
 
@@ -320,6 +331,12 @@ body {
 .pause__btn--hide {
   display: none; }
 
+.setting--hide {
+  display: none; }
+
+.setting__btn--opacity {
+  opacity: 0; }
+
 @media only screen and (hover: hover) {
   .start__btn {
     background-color: var(--black-clr);
@@ -351,6 +368,9 @@ body {
     --primary-title-fs: 4rem;
     --txtbox-primary-title-fs: 2rem;
     --list-fs: 1.125rem; }
+  .setting {
+    --setting-btns-gap: 3rem;
+    --setting-icons-fs: 6rem; }
   .area {
     --ball-width: 1.5rem;
     --area-before-width: 17rem; } }
@@ -367,6 +387,9 @@ body {
     --start-btn-fs: 3rem;
     --start-btn-width: 14rem;
     --start-btn-height: 14rem; }
+  .setting {
+    --setting-btns-gap: 2.5rem;
+    --setting-icons-fs: 5rem; }
   .area {
     --score-fs: 1.5rem;
     --setting-top: 2rem;
@@ -390,6 +413,9 @@ body {
     --start-btn-fs: 2.75rem;
     --start-btn-width: 12rem;
     --start-btn-height: 12rem; }
+  .setting {
+    --setting-btns-gap: 1.75rem;
+    --setting-icons-fs: 3.5rem; }
   .area {
     --paddle-width: 6rem;
     --ball-width: 1.125rem;

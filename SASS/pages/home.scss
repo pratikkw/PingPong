@@ -37,24 +37,30 @@
 
   // FONT
   --score-fs: 1.75rem;
-  --setting-icons-fs: 2.25rem;
 
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden;
 
-  .area__setting {
+  .setting__btn {
     position: absolute;
     top: var(--setting-top);
     right: var(--setting-right);
     transition: opacity 0.3s ease-in;
   }
 
-  .reset__icon,
-  .pause__icon,
-  .play__icon {
-    font-size: var(--setting-icons-fs);
-  }
+  // .area__setting {
+  //   position: absolute;
+  //   top: var(--setting-top);
+  //   right: var(--setting-right);
+  //   transition: opacity 0.3s ease-in;
+  // }
+
+  // .reset__icon,
+  // .pause__icon,
+  // .play__icon {
+  //   font-size: var(--setting-icons-fs);
+  // }
 
   &::after {
     content: "";

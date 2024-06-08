@@ -6,16 +6,17 @@ const main = document.querySelector(".main");
 const gameArea = document.querySelector(".area");
 const startSection = document.querySelector(".start");
 const instructionSection = document.querySelector(".help");
+const gameOptionSection = document.querySelector(".setting");
 
 // BTNs
 const magnetBtn = document.getElementById("magnet__btn");
 const magnetBtnTxt = document.getElementById("magnet__txt");
 const helpBtn = document.querySelector(".help__btn");
 const closeBtn = document.querySelector(".close__btn");
-const settingBox = document.querySelector(".area__setting");
+const settingBtn = document.querySelector(".setting__btn");
 const playBtn = document.querySelector(".play__btn");
-const pauseBtn = document.querySelector(".pause__btn");
-const restartBtn = document.querySelector(".reset__icon");
+const restartBtn = document.querySelector(".reset__btn");
+const quiteBtn = document.querySelector(".quite__btn");
 
 // COMPONENTs
 const listFirst = document.querySelectorAll(".list__one");
@@ -105,14 +106,13 @@ function updateSecBall(time) {
   idSec = window.requestAnimationFrame(updateSecBall);
 }
 
-function play_And_pause() {
-  pauseBtn.classList.toggle("pause__btn--hide");
-  playBtn.classList.toggle("play__btn--hide");
+function close_and_open_gameOption() {
+  gameOptionSection.classList.toggle("setting--hide");
 }
 
 function pauseBall() {
   if (id) {
-    play_And_pause();
+    close_and_open_gameOption();
     window.cancelAnimationFrame(id);
     id = null;
   }
@@ -120,7 +120,7 @@ function pauseBall() {
 
 function resumeBall() {
   if (!id) {
-    play_And_pause();
+    close_and_open_gameOption();
     lastTime = null;
     id = window.requestAnimationFrame(updateBall);
   }
@@ -129,14 +129,16 @@ function resumeBall() {
 function restartgame() {
   ball.reset();
   computerPaddle.reset();
-  playerScore.textContent = "00";
-  computerScore.textContent = "00";
+  playerPoint.textContent = "00";
+  computerPoint.textContent = "00";
+  close_and_open_gameOption();
   if (!id) {
     lastTime = null;
     id = window.requestAnimationFrame(updateBall);
-    play_And_pause();
   }
 }
+
+function quiteGame() {}
 
 function moveBtn(e) {
   const btnValue = 45;
@@ -176,7 +178,7 @@ function startGame() {
 
   controllerAccess = true;
   helpBtn.classList.add("help__btn--hide");
-  settingBox.classList.remove("area__setting--opacity");
+  settingBtn.classList.remove("setting__btn--opacity");
   playerScore.classList.remove("score--opacity");
   computerScore.classList.remove("score--opacity");
   id = window.requestAnimationFrame(updateBall);
@@ -227,6 +229,10 @@ function resetInstructionsAnim() {
   });
 }
 
+// function gameOption() {
+//   gameOptionSection.classList.remove("setting--hide");
+// }
+
 // EventListeners
 magnetBtn.addEventListener("click", startGame);
 
@@ -240,11 +246,13 @@ closeBtn.addEventListener("click", function () {
   resetInstructionsAnim();
 });
 
-pauseBtn.addEventListener("click", pauseBall);
+settingBtn.addEventListener("click", pauseBall);
 
 playBtn.addEventListener("click", resumeBall);
 
 restartBtn.addEventListener("click", restartgame);
+
+quiteBtn.addEventListener("click", quiteGame);
 
 document.addEventListener("keydown", function (e) {
   let value = 0;

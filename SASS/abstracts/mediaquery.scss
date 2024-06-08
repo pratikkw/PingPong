@@ -44,6 +44,14 @@
     --list-fs: 1.125rem;
   }
 
+  .setting {
+    // GAP
+    --setting-btns-gap: 3rem;
+
+    // FONT
+    --setting-icons-fs: 6rem;
+  }
+
   .area {
     --ball-width: 1.5rem;
     --area-before-width: 17rem;
@@ -73,6 +81,14 @@
     // WIDTH & HEIGHT
     --start-btn-width: 14rem;
     --start-btn-height: 14rem;
+  }
+
+  .setting {
+    // GAP
+    --setting-btns-gap: 2.5rem;
+
+    // FONT
+    --setting-icons-fs: 5rem;
   }
 
   .area {
@@ -116,6 +132,14 @@
     // WIDTH & HEIGHT
     --start-btn-width: 12rem;
     --start-btn-height: 12rem;
+  }
+
+  .setting {
+    // GAP
+    --setting-btns-gap: 1.75rem;
+
+    // FONT
+    --setting-icons-fs: 3.5rem;
   }
 
   .area {

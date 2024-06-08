@@ -1,0 +1,24 @@
+.setting {
+  // GAP
+  --setting-btns-gap: 4rem;
+
+  // FONT
+  --setting-icons-fs: 8rem;
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--setting-index);
+  background-color: hsla(0, 0%, 0%, 0.825);
+
+  display: grid;
+  place-items: center;
+
+  &__btns {
+    gap: var(--setting-btns-gap);
+
+    .icon {
+      font-size: var(--setting-icons-fs);
+      color: var(--white-clr);
+    }
+  }
+}
