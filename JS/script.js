@@ -172,7 +172,7 @@ function quiteGame() {
 
   // LAYOUT
   if (isHover == false) {
-    document.documentElement.style.setProperty("--game-layout", "100dvh");
+    document.documentElement.style.setProperty("--game-layout", "100vh");
     document.documentElement.style.setProperty("--controller-view", "none");
   }
 }
@@ -223,7 +223,7 @@ function startGame() {
   window.cancelAnimationFrame(idSec);
 
   if (isHover == false) {
-    document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
+    document.documentElement.style.setProperty("--game-layout", "85vh 15vh");
     document.documentElement.style.setProperty("--controller-view", "block");
   }
 }
