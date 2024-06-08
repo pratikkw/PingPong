@@ -61,7 +61,7 @@ textarea {
   --list-fs: 1.25rem;
   --help-icon-top: 1.25rem;
   --help-icon-right: 1.25rem;
-  --game-layout: 100vh;
+  --game-layout: 100dvh;
   --controller-view: none; }
 
 body {
