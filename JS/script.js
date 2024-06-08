@@ -46,15 +46,15 @@ window.addEventListener("load", function () {
   idSec = window.requestAnimationFrame(updateSecBall);
 });
 
-main.addEventListener(
-  "touchmove",
-  function (event) {
-    if (event.scale !== 1) {
-      event.preventDefault();
-    }
-  },
-  { passive: false }
-);
+// main.addEventListener(
+//   "touchmove",
+//   function (event) {
+//     if (event.scale !== 1) {
+//       event.preventDefault();
+//     }
+//   },
+//   { passive: false }
+// );
 
 function isHoverFunction(h) {
   if (h) {
@@ -169,6 +169,12 @@ function quiteGame() {
   close_and_open_gameOption();
   startSection.classList.remove("start--opacity");
   startSection.classList.remove("start--hide");
+
+  // LAYOUT
+  if (isHover == false) {
+    document.documentElement.style.setProperty("--game-layout", "100dvh");
+    document.documentElement.style.setProperty("--controller-view", "none");
+  }
 }
 
 function moveBtn(e) {
