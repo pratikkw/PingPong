@@ -1,11 +1,17 @@
 .start {
   // TOP, LEFT, RIGHT & BOTTOM
-  --start-help-top: 1.25rem;
-  --start-help-right: 1.25rem;
+  // --start-help-top: 1.25rem;
+  // --start-help-right: 1.25rem;
+  --customize-top: 80%;
+  --customize-left: 50%;
+
+  // PADDING
+  --customize-select-option-padding: 0.25rem 0.75rem;
 
   // FONT
-  // --help-icon-fs: 2.5rem;
   --start-btn-fs: 4rem;
+  --customize-span-fs: 2rem;
+  --customize-select-option-fs: 1.5rem;
 
   // WIDTH & HEIGHT
   --start-btn-width: 16rem;
@@ -32,5 +38,33 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+  }
+
+  .customize {
+    position: absolute;
+    top: var(--customize-top);
+    left: var(--customize-left);
+    transform: translate(-50%, 0%);
+
+    flex-wrap: wrap;
+    justify-content: center;
+    flex: 1;
+
+    &__span {
+      font-size: var(--customize-span-fs);
+      color: #fff;
+      text-wrap: nowrap;
+    }
+
+    &__select,
+    &__option {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: var(--customize-select-option-fs);
+      padding: var(--customize-select-option-padding);
+      border-radius: 0.25rem;
+      background-color: #fff;
+    }
   }
 }

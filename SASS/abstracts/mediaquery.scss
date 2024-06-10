@@ -44,6 +44,15 @@
     --list-fs: 1.125rem;
   }
 
+  .start {
+    // PADDING
+    --customize-select-option-padding: 0.25rem 0.5rem;
+
+    // FONT
+    --customize-span-fs: 1.5rem;
+    --customize-select-option-fs: 1.25rem;
+  }
+
   .setting {
     // GAP
     --setting-btns-gap: 3rem;
@@ -127,11 +136,21 @@
   }
 
   .start {
-    --start-btn-fs: 2.75rem;
+    // TOP, LEFT, RIGHT & BOTTOM
+    --customize-top: 75%;
+    --customize-left: 50%;
 
     // WIDTH & HEIGHT
     --start-btn-width: 12rem;
     --start-btn-height: 12rem;
+
+    // PADDING
+    --customize-select-option-padding: 0.25rem 0.5rem;
+
+    // FONT
+    --start-btn-fs: 2.75rem;
+    --customize-span-fs: 1.25rem;
+    --customize-select-option-fs: 1rem;
   }
 
   .setting {

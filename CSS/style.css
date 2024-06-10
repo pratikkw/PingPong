@@ -211,9 +211,12 @@ body {
     transition: transform 0.3s ease-in; }
 
 .start {
-  --start-help-top: 1.25rem;
-  --start-help-right: 1.25rem;
+  --customize-top: 80%;
+  --customize-left: 50%;
+  --customize-select-option-padding: 0.25rem 0.75rem;
   --start-btn-fs: 4rem;
+  --customize-span-fs: 2rem;
+  --customize-select-option-fs: 1.5rem;
   --start-btn-width: 16rem;
   --start-btn-height: 16rem;
   position: fixed;
@@ -233,6 +236,26 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden; }
+  .start .customize {
+    position: absolute;
+    top: var(--customize-top);
+    left: var(--customize-left);
+    transform: translate(-50%, 0%);
+    flex-wrap: wrap;
+    justify-content: center;
+    flex: 1; }
+    .start .customize__span {
+      font-size: var(--customize-span-fs);
+      color: #fff;
+      text-wrap: nowrap; }
+    .start .customize__select, .start .customize__option {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: var(--customize-select-option-fs);
+      padding: var(--customize-select-option-padding);
+      border-radius: 0.25rem;
+      background-color: #fff; }
 
 .help {
   --help-padding: 2rem 1.5rem;
@@ -362,6 +385,10 @@ body {
     --primary-title-fs: 4rem;
     --txtbox-primary-title-fs: 2rem;
     --list-fs: 1.125rem; }
+  .start {
+    --customize-select-option-padding: 0.25rem 0.5rem;
+    --customize-span-fs: 1.5rem;
+    --customize-select-option-fs: 1.25rem; }
   .setting {
     --setting-btns-gap: 3rem;
     --setting-icons-fs: 6rem; }
@@ -404,9 +431,14 @@ body {
     --txt-box-mg-bttm: 2rem;
     --txt-box-gap: 1rem; }
   .start {
-    --start-btn-fs: 2.75rem;
+    --customize-top: 75%;
+    --customize-left: 50%;
     --start-btn-width: 12rem;
-    --start-btn-height: 12rem; }
+    --start-btn-height: 12rem;
+    --customize-select-option-padding: 0.25rem 0.5rem;
+    --start-btn-fs: 2.75rem;
+    --customize-span-fs: 1.25rem;
+    --customize-select-option-fs: 1rem; }
   .setting {
     --setting-btns-gap: 1.75rem;
     --setting-icons-fs: 3.5rem; }
