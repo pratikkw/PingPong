@@ -1,8 +1,6 @@
 import Ball from "./ball.js";
 import Paddle from "./paddle.js";
 
-const test = document.querySelector(".test-txt");
-
 // LAYOUT
 const main = document.querySelector(".main");
 const gameArea = document.querySelector(".area");
@@ -50,7 +48,6 @@ let lastTime;
 let lastTimeTwo;
 let controllerAccess = false;
 let SPEEDArray = [0.01, 0.0125, 0.015, 0.02];
-// const SPEEDArray = [0.0075, 0.008, 0.0081 0.009];
 let speed;
 let roundNo;
 let gameEnd = false;
@@ -69,7 +66,6 @@ function handleMediaQueryChange(event) {
 function randomSpeed() {
   const num = Math.floor(Math.random() * 4);
   speed = SPEEDArray[num];
-  test.textContent = `${speed}|`;
 }
 
 main.addEventListener(
