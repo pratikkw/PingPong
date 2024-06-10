@@ -61,8 +61,10 @@ window.addEventListener("load", function () {
 });
 
 function handleMediaQueryChange(event) {
-  SPEEDArray = [0.0075, 0.008, 0.0081, 0.009];
-  console.log(SPEEDArray);
+  if (event.matches) {
+    SPEEDArray = [0.0075, 0.008, 0.0081, 0.009];
+    // console.log(SPEEDArray);
+  }
 }
 
 function randomSpeed() {
@@ -426,3 +428,4 @@ controllerBar.addEventListener("touchmove", function (e) {
 });
 
 mediaQuery.addEventListener("change", handleMediaQueryChange);
+handleMediaQueryChange(mediaQuery);
