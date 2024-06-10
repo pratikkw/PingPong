@@ -217,6 +217,7 @@ body {
   --start-btn-fs: 4rem;
   --customize-span-fs: 2rem;
   --customize-select-option-fs: 1.5rem;
+  --customize-gap: 1.25rem;
   --start-btn-width: 16rem;
   --start-btn-height: 16rem;
   position: fixed;
@@ -243,7 +244,8 @@ body {
     transform: translate(-50%, 0%);
     flex-wrap: wrap;
     justify-content: center;
-    flex: 1; }
+    flex: 1;
+    gap: var(--customize-gap); }
     .start .customize__span {
       font-size: var(--customize-span-fs);
       color: #fff;

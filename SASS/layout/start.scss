@@ -13,6 +13,9 @@
   --customize-span-fs: 2rem;
   --customize-select-option-fs: 1.5rem;
 
+  // GAP
+  --customize-gap: 1.25rem;
+
   // WIDTH & HEIGHT
   --start-btn-width: 16rem;
   --start-btn-height: 16rem;
@@ -49,6 +52,7 @@
     flex-wrap: wrap;
     justify-content: center;
     flex: 1;
+    gap: var(--customize-gap);
 
     &__span {
       font-size: var(--customize-span-fs);
