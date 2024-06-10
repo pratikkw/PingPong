@@ -64,6 +64,9 @@
   .area {
     --ball-width: 1.5rem;
     --area-before-width: 17rem;
+
+    // FONT
+    --game-result-fs: 2.5rem;
   }
 }
 
@@ -103,6 +106,7 @@
   .area {
     // FONT
     --score-fs: 1.5rem;
+    --game-result-fs: 2rem;
 
     // TOP, LEFT, RIGHT & BOTTOM
     --setting-top: 2rem;
@@ -171,7 +175,13 @@
     --area-before-width: 14rem;
 
     // FONT
+    --score-fs: 1.35rem;
     --setting-icons-fs: 1.75rem;
+    --game-result-fs: 1.55rem;
+
+    // TOP, BOTTOM, LEFT & RIGHT
+    --score-computer-right: 0.5rem;
+    --score-player-left: 0.5rem;
   }
 
   .controller {
@@ -183,6 +193,6 @@
 @media only screen and (max-width: 350px) {
   .area {
     --paddle-width: 5rem;
-    --area-before-width: 13rem;
+    --area-before-width: 11rem;
   }
 }

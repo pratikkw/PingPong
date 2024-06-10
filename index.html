@@ -57,21 +57,33 @@
         <div class="customize__round flex">
           <span class="customize__span">Rounds</span>
           <select class="customize__select" name="" id="roundNo">
-            <option class="customize__option" value="5" selected>5</option>
-            <option class="customize__option" value="8">8</option>
-            <option class="customize__option" value="12">12</option>
-            <option class="customize__option" value="-1">Infinite</option>
+            <option class="customize__option option__round" value="05" selected>
+              05
+            </option>
+            <option class="customize__option option__round" value="08">
+              08
+            </option>
+            <option class="customize__option option__round" value="12">
+              12
+            </option>
+            <option class="customize__option option__round" value="-1">
+              Infinite
+            </option>
           </select>
         </div>
 
-        <div class="customize__vs flex">
+        <div class="customize__vs flex customize__vs--hide">
           <span class="customize__span">Player vs</span>
           <select class="customize__select" name="" id="competetitor">
-            <option class="customize__option" value="Computer" selected>
+            <option
+              class="customize__option option__against"
+              value="Computer"
+              selected
+            >
               Computer
             </option>
             <option
-              class="customize__option"
+              class="customize__option option__against"
               value="Player"
               class="customize__span"
             >
@@ -160,14 +172,24 @@
         </span>
 
         <div class="score score__computer score--opacity">
-          <span class="point point__computer">00</span>
+          <span class="point point__computer">00</span>/<span
+            class="point point__total"
+            >05</span
+          >
         </div>
         <div class="paddle paddle__computer"></div>
         <div class="ball"></div>
         <div class="showcase__ball"></div>
         <div class="paddle paddle__user"></div>
         <div class="score score__player score--opacity">
-          <span class="point point__player">00</span>
+          <span class="point point__player">00</span>/<span
+            class="point point__total"
+            >05</span
+          >
+        </div>
+
+        <div class="game__result game__result--hide">
+          <h2 class="secondary--title">You win</h2>
         </div>
       </section>
       <div class="controller controller__player">

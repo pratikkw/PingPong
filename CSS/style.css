@@ -49,6 +49,8 @@ textarea {
   --black-clr: #000;
   --area-after-index: 25;
   --area-before-index: 50;
+  --score-index: 75;
+  --game-result-index: 150;
   --help-icon-index: 600;
   --help-index: 500;
   --start-index: 400;
@@ -109,7 +111,10 @@ body {
   --paddle-user-bottom: 1vh;
   --setting-top: 1.25rem;
   --setting-right: 1.25rem;
+  --score-computer-right: 0.75rem;
+  --score-player-left: 0.75rem;
   --score-fs: 1.75rem;
+  --game-result-fs: 3rem;
   background-color: var(--area-bk-clr);
   position: relative;
   overflow: hidden; }
@@ -141,6 +146,15 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: var(--area-before-index); }
+  .area .game__result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: var(--game-result-index);
+    text-wrap: nowrap;
+    color: var(--white-clr);
+    font-size: var(--game-result-fs); }
 
 .paddle {
   --position: 50;
@@ -174,15 +188,18 @@ body {
   position: absolute;
   font-size: var(--score-fs);
   font-weight: 500;
-  transition: opacity 0.3s; }
+  transition: opacity 0.3s;
+  z-index: var(--score-index); }
   .score__computer {
     top: 45%;
-    right: 0%;
-    transform: translate(-50%, -50%); }
+    right: var(--score-computer-right);
+    transform: translate(0%, -50%); }
   .score__player {
     bottom: 45%;
-    left: 0%;
-    transform: translate(50%, 50%); }
+    left: var(--score-player-left);
+    transform: translate(0%, 50%); }
+  .score .point__total {
+    opacity: 0.4; }
 
 .controller {
   --controller-bar-width: 3.5rem;
@@ -335,10 +352,16 @@ body {
 .hide {
   display: none; }
 
+.game__result--hide {
+  display: none; }
+
 .start--opacity {
   opacity: 0; }
 
 .start--hide {
+  display: none; }
+
+.customize__vs--hide {
   display: none; }
 
 .score--opacity {
@@ -358,6 +381,10 @@ body {
 
 .setting__btn--opacity {
   opacity: 0; }
+
+.play__btn--deactive {
+  opacity: 0.3;
+  pointer-events: none; }
 
 @media only screen and (hover: hover) {
   .start__btn {
@@ -399,7 +426,8 @@ body {
     --setting-icons-fs: 6rem; }
   .area {
     --ball-width: 1.5rem;
-    --area-before-width: 17rem; } }
+    --area-before-width: 17rem;
+    --game-result-fs: 2.5rem; } }
 
 @media only screen and (max-width: 700px) {
   :root {
@@ -418,6 +446,7 @@ body {
     --setting-icons-fs: 5rem; }
   .area {
     --score-fs: 1.5rem;
+    --game-result-fs: 2rem;
     --setting-top: 2rem;
     --setting-right: 1.5rem; }
     .area__setting {
@@ -452,11 +481,15 @@ body {
     --paddle-width: 6rem;
     --ball-width: 1.125rem;
     --area-before-width: 14rem;
-    --setting-icons-fs: 1.75rem; }
+    --score-fs: 1.35rem;
+    --setting-icons-fs: 1.75rem;
+    --game-result-fs: 1.55rem;
+    --score-computer-right: 0.5rem;
+    --score-player-left: 0.5rem; }
   .controller {
     --controller-bar-width: 3.25rem; } }
 
 @media only screen and (max-width: 350px) {
   .area {
     --paddle-width: 5rem;
-    --area-before-width: 13rem; } }
+    --area-before-width: 11rem; } }

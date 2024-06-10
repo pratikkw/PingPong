@@ -8,11 +8,19 @@
   display: none;
 }
 
+.game__result--hide {
+  display: none;
+}
+
 .start--opacity {
   opacity: 0;
 }
 
 .start--hide {
+  display: none;
+}
+
+.customize__vs--hide {
   display: none;
 }
 
@@ -38,4 +46,9 @@
 
 .setting__btn--opacity {
   opacity: 0;
+}
+
+.play__btn--deactive {
+  opacity: 0.3;
+  pointer-events: none;
 }

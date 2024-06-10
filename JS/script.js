@@ -25,9 +25,15 @@ const playerScore = document.querySelector(".score__player");
 const computerScore = document.querySelector(".score__computer");
 const playerPoint = document.querySelector(".point__player");
 const computerPoint = document.querySelector(".point__computer");
+const totalPoint = document.querySelectorAll(".point__total");
 const controllerBox = document.querySelector(".controller__player");
 const controllerLine = document.querySelector(".controller__line");
 const controllerBar = document.querySelector(".controller__bar");
+const customizePlayer = document.querySelector(".customize__vs");
+const no_of_round = document.getElementById("roundNo");
+const playagainst = document.getElementById("competetitor");
+const result = document.querySelector(".game__result");
+const resultTxt = document.querySelector(".game__result h2");
 
 // Global Variables
 const ball = new Ball(document.querySelector(".ball"));
@@ -42,6 +48,8 @@ let lastTimeTwo;
 let controllerAccess = false;
 const SPEEDArray = [0.01, 0.0125, 0.015, 0.02];
 let speed;
+let roundNo;
+let gameEnd = false;
 
 window.addEventListener("load", function () {
   isHoverFunction(isHover);
@@ -67,12 +75,46 @@ function isHoverFunction(h) {
   if (h) {
     magnetBtn.addEventListener("mousemove", moveBtn);
     magnetBtn.addEventListener("mouseleave", revertBtn);
+  } else {
+    customizePlayer.classList.remove("customize__vs--hide");
   }
 }
 
 function isLose() {
   const rect = ball.rect();
   return rect.top <= 0 || rect.bottom >= gameArea.offsetHeight;
+}
+
+function gameOver() {
+  if (gameEnd) {
+    computerPaddle.reset();
+    ball.ballEle.style.display = "none";
+    playBtn.classList.add("play__btn--deactive");
+  }
+}
+
+function announceResult(txt) {
+  result.classList.remove("game__result--hide");
+  resultTxt.textContent = txt;
+}
+
+function checkScore() {
+  const cmpScore = parseInt(computerPoint.textContent);
+  const playerScore = parseInt(playerPoint.textContent);
+
+  if (roundNo.value == cmpScore) {
+    announceResult("You Lose");
+    window.cancelAnimationFrame(id);
+    id = null;
+    gameEnd = true;
+    gameOver();
+  } else if (roundNo.value == playerScore) {
+    announceResult("You Win");
+    window.cancelAnimationFrame(id);
+    id = null;
+    gameEnd = true;
+    gameOver();
+  }
 }
 
 function scoreTable() {
@@ -91,6 +133,7 @@ function scoreTable() {
   ball.reset();
   computerPaddle.reset();
   randomSpeed();
+  checkScore();
 }
 
 function updateBall(time) {
@@ -103,6 +146,7 @@ function updateBall(time) {
   }
   lastTime = time;
   id = window.requestAnimationFrame(updateBall);
+  checkScore();
 }
 
 function updateSecBall(time) {
@@ -119,31 +163,14 @@ function close_and_open_gameOption() {
 }
 
 function pauseBall() {
+  close_and_open_gameOption();
   if (id) {
-    close_and_open_gameOption();
     window.cancelAnimationFrame(id);
     id = null;
   }
 }
 
 function resumeBall() {
-  if (!id) {
-    close_and_open_gameOption();
-    lastTime = null;
-    id = window.requestAnimationFrame(updateBall);
-  }
-}
-
-function restartgame() {
-  ball.reset();
-  randomSpeed();
-  computerPaddle.reset();
-  playerPaddle.reset();
-  playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
-  controllerLine.style.setProperty("--left", 50);
-  controllerBar.style.transform = "translate(-50%, -50%)";
-  playerPoint.textContent = "00";
-  computerPoint.textContent = "00";
   close_and_open_gameOption();
   if (!id) {
     lastTime = null;
@@ -151,22 +178,64 @@ function restartgame() {
   }
 }
 
+function restartgame() {
+  // BALL
+  ball.reset();
+  ball.ballEle.style.display = "block";
+
+  // Result
+  result.classList.add("game__result--hide");
+
+  // Play Btn
+  playBtn.classList.remove("play__btn--deactive");
+
+  // Ball Velocity
+  randomSpeed();
+
+  // Paddle
+  computerPaddle.reset();
+  playerPaddle.reset();
+  playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
+  controllerLine.style.setProperty("--left", 50);
+  controllerBar.style.transform = "translate(-50%, -50%)";
+
+  // Score
+  playerPoint.textContent = "00";
+  computerPoint.textContent = "00";
+
+  // Game Menu
+  close_and_open_gameOption();
+
+  // Rerun Ball
+  if (!id) {
+    lastTime = null;
+    id = window.requestAnimationFrame(updateBall);
+  }
+}
+
 function quiteGame() {
-  // SMALL Elements
+  // Score
   playerPoint.textContent = "00";
   computerPoint.textContent = "00";
   playerScore.classList.add("score--opacity");
   computerScore.classList.add("score--opacity");
+
+  // BTNs
   settingBtn.classList.add("setting__btn--opacity");
   helpBtn.classList.remove("help__btn--hide");
+  playBtn.classList.remove("play__btn--deactive");
+
+  // RESULT
+  result.classList.add("game__result--hide");
 
   // BALLs
   ball.reset();
+  ball.ballEle.style.display = "block";
   window.cancelAnimationFrame(id);
   id = null;
   lastTime = null;
   secondBall.rect();
-  secondBall.ballEle.style = "block";
+  secondBall.ballEle.style.display = "block";
   lastTimeTwo = null;
   idSec = window.requestAnimationFrame(updateSecBall);
 
@@ -221,21 +290,36 @@ function revertBtn(e) {
 }
 
 function startGame() {
-  randomSpeed();
+  // No of Round
+  roundNo = no_of_round.options[no_of_round.selectedIndex];
+
+  // Start Section
   startSection.classList.add("start--opacity");
   setTimeout(() => {
     startSection.classList.add("start--hide");
   }, 320);
 
-  controllerAccess = true;
+  // Help & Setting Btn
   helpBtn.classList.add("help__btn--hide");
   settingBtn.classList.remove("setting__btn--opacity");
+
+  // Score
+  totalPoint.forEach((item) => (item.textContent = `${roundNo.value}`));
   playerScore.classList.remove("score--opacity");
   computerScore.classList.remove("score--opacity");
+
+  // Ball
   id = window.requestAnimationFrame(updateBall);
   secondBall.ballEle.style.display = "none";
   window.cancelAnimationFrame(idSec);
 
+  // Player Controller Access
+  controllerAccess = true;
+
+  // Computer Paddle Speed
+  randomSpeed();
+
+  // Touch Screen Layout
   if (isHover == false) {
     document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
     document.documentElement.style.setProperty("--controller-view", "block");
