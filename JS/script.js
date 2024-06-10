@@ -63,15 +63,13 @@ window.addEventListener("load", function () {
 function handleMediaQueryChange(event) {
   if (event.matches) {
     SPEEDArray = [0.0075, 0.008, 0.0081, 0.009];
-    // console.log(SPEEDArray);
   }
 }
 
 function randomSpeed() {
   const num = Math.floor(Math.random() * 4);
   speed = SPEEDArray[num];
-  // console.log(speed);
-  test.textContent = `${speed}`;
+  test.textContent = `${speed}|`;
 }
 
 main.addEventListener(
@@ -428,3 +426,4 @@ controllerBar.addEventListener("touchmove", function (e) {
 });
 
 mediaQuery.addEventListener("change", handleMediaQueryChange);
+handleMediaQueryChange(mediaQuery);
