@@ -437,8 +437,8 @@ body {
     --start-btn-height: 12rem;
     --customize-select-option-padding: 0.25rem 0.5rem;
     --start-btn-fs: 2.75rem;
-    --customize-span-fs: 1.25rem;
-    --customize-select-option-fs: 1rem; }
+    --customize-span-fs: 1.3rem;
+    --customize-select-option-fs: 1.125rem; }
   .setting {
     --setting-btns-gap: 1.75rem;
     --setting-icons-fs: 3.5rem; }
