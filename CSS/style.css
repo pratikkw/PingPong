@@ -218,6 +218,7 @@ body {
   --customize-span-fs: 2rem;
   --customize-select-option-fs: 1.5rem;
   --customize-gap: 1.25rem;
+  --customize-round-vs-gap: 1rem;
   --start-btn-width: 16rem;
   --start-btn-height: 16rem;
   position: fixed;
@@ -246,6 +247,8 @@ body {
     justify-content: center;
     flex: 1;
     gap: var(--customize-gap); }
+    .start .customize__round {
+      gap: var(--customize-round-vs-gap); }
     .start .customize__span {
       font-size: var(--customize-span-fs);
       color: #fff;
@@ -438,6 +441,7 @@ body {
     --start-btn-width: 12rem;
     --start-btn-height: 12rem;
     --customize-select-option-padding: 0.25rem 0.5rem;
+    --customize-round-vs-gap: 0.5rem;
     --start-btn-fs: 2.75rem;
     --customize-span-fs: 1.3rem;
     --customize-select-option-fs: 1.125rem; }

@@ -15,6 +15,7 @@
 
   // GAP
   --customize-gap: 1.25rem;
+  --customize-round-vs-gap: 1rem;
 
   // WIDTH & HEIGHT
   --start-btn-width: 16rem;
@@ -53,6 +54,11 @@
     justify-content: center;
     flex: 1;
     gap: var(--customize-gap);
+
+    &__round,
+    %__vs {
+      gap: var(--customize-round-vs-gap);
+    }
 
     &__span {
       font-size: var(--customize-span-fs);
