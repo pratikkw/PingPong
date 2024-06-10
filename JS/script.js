@@ -71,7 +71,7 @@ function randomSpeed() {
   const num = Math.floor(Math.random() * 4);
   speed = SPEEDArray[num];
   // console.log(speed);
-  test.textContent = `${speed}|`;
+  test.textContent = `${speed}`;
 }
 
 main.addEventListener(
@@ -428,4 +428,3 @@ controllerBar.addEventListener("touchmove", function (e) {
 });
 
 mediaQuery.addEventListener("change", handleMediaQueryChange);
-handleMediaQueryChange(mediaQuery);
