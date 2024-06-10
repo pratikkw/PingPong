@@ -82,6 +82,15 @@ body {
   grid-template-columns: 1fr;
   gap: 1rem; }
 
+.test {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 160; }
+  .test-txt {
+    font-size: 2rem; }
+
 .icon__btn {
   -webkit-tap-highlight-color: transparent; }
 

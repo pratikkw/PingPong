@@ -1,6 +1,8 @@
 import Ball from "./ball.js";
 import Paddle from "./paddle.js";
 
+const test = document.querySelector(".test-txt");
+
 // LAYOUT
 const main = document.querySelector(".main");
 const gameArea = document.querySelector(".area");
@@ -41,12 +43,14 @@ const secondBall = new Ball(document.querySelector(".showcase__ball"));
 const playerPaddle = new Paddle(document.querySelector(".paddle__user"));
 const computerPaddle = new Paddle(document.querySelector(".paddle__computer"));
 const isHover = window.matchMedia("(hover: hover)").matches;
+const mediaQuery = window.matchMedia("(max-width: 700px)");
 let id;
 let idSec;
 let lastTime;
 let lastTimeTwo;
 let controllerAccess = false;
-const SPEEDArray = [0.01, 0.0125, 0.015, 0.02];
+let SPEEDArray = [0.01, 0.0125, 0.015, 0.02];
+// const SPEEDArray = [0.0075, 0.008, 0.0081 0.009];
 let speed;
 let roundNo;
 let gameEnd = false;
@@ -56,9 +60,16 @@ window.addEventListener("load", function () {
   idSec = window.requestAnimationFrame(updateSecBall);
 });
 
+function handleMediaQueryChange(event) {
+  SPEEDArray = [0.0075, 0.008, 0.0081, 0.009];
+  console.log(SPEEDArray);
+}
+
 function randomSpeed() {
   const num = Math.floor(Math.random() * 4);
   speed = SPEEDArray[num];
+  // console.log(speed);
+  test.textContent = speed;
 }
 
 main.addEventListener(
@@ -413,3 +424,5 @@ controllerBar.addEventListener("touchmove", function (e) {
     }
   }
 });
+
+mediaQuery.addEventListener("change", handleMediaQueryChange);
