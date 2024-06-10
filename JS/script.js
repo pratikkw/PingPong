@@ -40,11 +40,18 @@ let idSec;
 let lastTime;
 let lastTimeTwo;
 let controllerAccess = false;
+const SPEEDArray = [0.01, 0.0125, 0.015, 0.02];
+let speed;
 
 window.addEventListener("load", function () {
   isHoverFunction(isHover);
   idSec = window.requestAnimationFrame(updateSecBall);
 });
+
+function randomSpeed() {
+  const num = Math.floor(Math.random() * 4);
+  speed = SPEEDArray[num];
+}
 
 main.addEventListener(
   "touchmove",
@@ -83,13 +90,14 @@ function scoreTable() {
   }
   ball.reset();
   computerPaddle.reset();
+  randomSpeed();
 }
 
 function updateBall(time) {
   if (lastTime) {
     const delta = time - lastTime;
     ball.update(delta, gameArea, [playerPaddle.rect(), computerPaddle.rect()]);
-    computerPaddle.updateComputer(delta, ball.x, gameArea);
+    computerPaddle.updateComputer(delta, ball.x, speed, gameArea);
 
     if (isLose()) scoreTable();
   }
@@ -128,6 +136,7 @@ function resumeBall() {
 
 function restartgame() {
   ball.reset();
+  randomSpeed();
   computerPaddle.reset();
   playerPaddle.reset();
   playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
@@ -212,6 +221,7 @@ function revertBtn(e) {
 }
 
 function startGame() {
+  randomSpeed();
   startSection.classList.add("start--opacity");
   setTimeout(() => {
     startSection.classList.add("start--hide");
@@ -290,14 +300,8 @@ restartBtn.addEventListener("click", restartgame);
 
 quiteBtn.addEventListener("click", quiteGame);
 
-document.addEventListener("keydown", function (e) {
-  let value = 0;
-  if (!controllerAccess) return;
-  if (e.key == "ArrowLeft") {
-    value -= 5;
-  } else if (e.key == "ArrowRight") {
-    value += 5;
-  }
+gameArea.addEventListener("mousemove", function (e) {
+  let value = (e.clientX / gameArea.offsetWidth) * 100;
   playerPaddle.updatePlayerPaddle(value, gameArea);
 });
 

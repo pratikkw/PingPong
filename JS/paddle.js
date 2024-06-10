@@ -1,4 +1,5 @@
-const SPEED = 0.02;
+// const SPEED = 0.0125;
+// const SPEED = [0.01, 0.0125, 0.015, 0.02];
 
 export default class Paddle {
   constructor(paddleEle) {
@@ -24,7 +25,7 @@ export default class Paddle {
     this.position = 50;
   }
 
-  updateComputer(delta, ballWidth, area) {
+  updateComputer(delta, ballWidth, SPEED, area) {
     const rect = this.rect();
     const direction = ballWidth - this.position;
     if (rect.left <= 10 && direction <= 0) {
@@ -38,18 +39,17 @@ export default class Paddle {
 
   updatePlayerPaddle(val, area) {
     const rect = this.rect();
-    if (rect.left <= 10 && val <= 0) {
-      // this.position += 0;
-    } else if (rect.right >= area.offsetWidth - 10 && val >= 0) {
-      // this.position += 0;
+    if (rect.left <= 10 && val <= 10) {
+      // this.position = 0;
+    } else if (rect.right >= area.offsetWidth - 10 && val >= 90) {
+      // this.position = 0;
     } else {
-      this.position += val;
+      this.position = val;
     }
   }
 
   updatePaddleForTouchDevice(val, bar, area) {
     const rect = this.rect();
-
     if (rect.left <= 10 && val < 15) {
       bar.style.transform = "translate(0%, -50%)";
     } else if (rect.right >= area.offsetWidth - 10 && val > 85) {
