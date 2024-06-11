@@ -189,7 +189,8 @@ body {
   font-size: var(--score-fs);
   font-weight: 500;
   transition: opacity 0.3s;
-  z-index: var(--score-index); }
+  z-index: var(--score-index);
+  display: flex; }
   .score__computer {
     top: 45%;
     right: var(--score-computer-right);

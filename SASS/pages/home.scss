@@ -126,8 +126,6 @@
   z-index: var(--ball-index);
   background-color: var(--white-clr);
   position: absolute;
-  // top: calc(var(--y) * 1vh);
-  // left: calc(var(--x) * 1vw);
   top: calc(var(--y) * 1%);
   left: calc(var(--x) * 1%);
   transform: translate(-50%, -50%);
@@ -139,6 +137,7 @@
   font-weight: 500;
   transition: opacity 0.3s;
   z-index: var(--score-index);
+  display: flex;
 
   &__computer {
     top: 45%;

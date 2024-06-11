@@ -311,7 +311,19 @@ function startGame() {
   settingBtn.classList.remove("setting__btn--opacity");
 
   // Score
-  totalPoint.forEach((item) => (item.textContent = `${roundNo.value}`));
+  totalPoint.forEach((item) => {
+    if (roundNo.value == -1) {
+      item.textContent = "";
+      document
+        .querySelectorAll(".point__slash")
+        .forEach((item) => (item.style.display = "none"));
+    } else {
+      document
+        .querySelectorAll(".point__slash")
+        .forEach((item) => (item.style.display = "block"));
+      item.textContent = `${roundNo.value}`;
+    }
+  });
   playerScore.classList.remove("score--opacity");
   computerScore.classList.remove("score--opacity");
 
