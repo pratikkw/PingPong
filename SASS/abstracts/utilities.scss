@@ -8,10 +8,18 @@
   display: none;
 }
 
-.game__result--hide {
+// --> Help Btn
+.help__btn--hide {
   display: none;
 }
 
+// --> Close Btn
+.close__btn--hide {
+  display: none;
+}
+// -------------------
+
+// --> Start Section
 .start--opacity {
   opacity: 0;
 }
@@ -20,43 +28,52 @@
   display: none;
 }
 
+// --> Customize Game
 .customize__vs--hide {
   display: none;
 }
+// -------------------
 
-.score--opacity {
-  opacity: 0;
-}
-
+// --> Help Section
 .help--hide {
   display: none;
 }
+// -------------------
 
-.help__btn--hide {
-  display: none;
-}
-
-.close__btn--hide {
-  display: none;
-}
-
-.setting--hide {
-  display: none;
-}
-
+// --> Setting btn
 .setting__btn--opacity {
   opacity: 0;
 }
 
+// --> Setting Section
+.setting--hide {
+  display: none;
+}
+// -------------------
+
+// --> Game Result
+.game__result--hide {
+  display: none;
+}
+// ------------------
+
+// --> Score
+.score--opacity {
+  opacity: 0;
+}
+
+// --> Game Menu Play Btns
 .play__btn--deactive {
   opacity: 0.3;
   pointer-events: none;
 }
 
+// --> Second Player Paddle
 .paddle__playerSec--hide {
   display: none;
 }
 
+// --> Computer Paddle
 .paddle__computer--hide {
   display: none;
 }

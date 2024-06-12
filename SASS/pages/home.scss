@@ -136,7 +136,7 @@
   position: absolute;
   font-size: var(--score-fs);
   font-weight: 500;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease-in;
   z-index: var(--score-index);
   display: flex;
 
@@ -170,8 +170,8 @@
   }
 
   &__playersec {
-    border-bottom: 2px solid #000;
     display: var(--controller-view-p2);
+    border-bottom: 2px solid #000;
   }
 
   &__line {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ping Pong</title>
+    <title>Pong Game</title>
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -56,7 +56,7 @@
       <div class="customize flex">
         <div class="customize__round flex">
           <span class="customize__span">Rounds</span>
-          <select class="customize__select" name="" id="roundNo">
+          <select class="customize__select" id="roundNo">
             <option class="customize__option option__round" value="05" selected>
               05
             </option>
@@ -74,7 +74,7 @@
 
         <div class="customize__vs flex customize__vs--hide">
           <span class="customize__span">Player vs</span>
-          <select class="customize__select" name="" id="competetitor">
+          <select class="customize__select" id="competetitor">
             <option
               class="customize__option option__against"
               value="false"
@@ -143,6 +143,7 @@
       </div>
     </section>
 
+    <!-- GAME MENU -->
     <section class="setting setting--hide">
       <div class="setting__btns flex">
         <span class="icon__btn reset__btn">
@@ -162,6 +163,7 @@
     </section>
 
     <main class="main">
+      <!-- Second Player Controller -->
       <div class="controller controller__playersec">
         <div class="controller__line controller__line--playersec">
           <span class="controller__bar controller__bar--playersec">
@@ -169,6 +171,7 @@
           </span>
         </div>
       </div>
+
       <!-- GAME AREA -->
       <section class="area">
         <span class="icon__btn setting__btn setting__btn--opacity">
@@ -198,6 +201,8 @@
           <h2 class="secondary--title">You win</h2>
         </div>
       </section>
+
+      <!-- First Player Controller -->
       <div class="controller controller__playerone">
         <div class="controller__line controller__line--playerone">
           <span class="controller__bar controller__bar--playerone">

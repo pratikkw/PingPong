@@ -8,7 +8,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--setting-index);
-  background-color: hsla(0, 0%, 0%, 0.825);
+  background-color: var(--setting-bk-clr);
 
   display: grid;
   place-items: center;
