@@ -26,9 +26,12 @@ const computerScore = document.querySelector(".score__computer");
 const playerPoint = document.querySelector(".point__player");
 const computerPoint = document.querySelector(".point__computer");
 const totalPoint = document.querySelectorAll(".point__total");
-const controllerBox = document.querySelector(".controller__player");
-const controllerLine = document.querySelector(".controller__line");
-const controllerBar = document.querySelector(".controller__bar");
+const p1controllerArea = document.querySelector(".controller__playerone");
+const p1controllerLine = document.querySelector(".controller__line--playerone");
+const p1controllerBar = document.querySelector(".controller__bar--playerone");
+const p2controllerArea = document.querySelector(".controller__playersec");
+const p2controllerLine = document.querySelector(".controller__line--playersec");
+const p2controllerBar = document.querySelector(".controller__bar--playersec");
 const customizePlayer = document.querySelector(".customize__vs");
 const no_of_round = document.getElementById("roundNo");
 const playagainst = document.getElementById("competetitor");
@@ -39,9 +42,13 @@ const resultTxt = document.querySelector(".game__result h2");
 const ball = new Ball(document.querySelector(".ball"));
 const secondBall = new Ball(document.querySelector(".showcase__ball"));
 const playerPaddle = new Paddle(document.querySelector(".paddle__user"));
+const secPlayerPaddle = new Paddle(
+  document.querySelector(".paddle__playerSec")
+);
 const computerPaddle = new Paddle(document.querySelector(".paddle__computer"));
 const isHover = window.matchMedia("(hover: hover)").matches;
 const mediaQuery = window.matchMedia("(max-width: 700px)");
+
 let id;
 let idSec;
 let lastTime;
@@ -51,11 +58,82 @@ let SPEEDArray = [0.01, 0.0125, 0.015, 0.02];
 let speed;
 let roundNo;
 let gameEnd = false;
+let secondPlayer;
 
 window.addEventListener("load", function () {
   isHoverFunction(isHover);
   idSec = window.requestAnimationFrame(updateSecBall);
 });
+
+function startGame() {
+  // No of Round
+  roundNo = no_of_round.options[no_of_round.selectedIndex];
+
+  // Play Against
+  secondPlayer = playagainst.options[playagainst.selectedIndex].value;
+  whoIsPlaying();
+
+  // Start Section
+  startSection.classList.add("start--opacity");
+  setTimeout(() => {
+    startSection.classList.add("start--hide");
+  }, 320);
+
+  // Help & Setting Btn
+  helpBtn.classList.add("help__btn--hide");
+  settingBtn.classList.remove("setting__btn--opacity");
+
+  // Score
+  totalPoint.forEach((item) => {
+    if (roundNo.value == -1) {
+      item.textContent = "";
+      document
+        .querySelectorAll(".point__slash")
+        .forEach((item) => (item.style.display = "none"));
+    } else {
+      document
+        .querySelectorAll(".point__slash")
+        .forEach((item) => (item.style.display = "block"));
+      item.textContent = `${roundNo.value}`;
+    }
+  });
+  playerScore.classList.remove("score--opacity");
+  computerScore.classList.remove("score--opacity");
+
+  // Ball
+  id = window.requestAnimationFrame(updateBall);
+  secondBall.ballEle.style.display = "none";
+  window.cancelAnimationFrame(idSec);
+
+  // Player Controller Access
+  controllerAccess = true;
+
+  // Computer Paddle Speed
+  randomSpeed();
+
+  // Touch Screen Layout
+  if (isHover == false && secondPlayer == "false") {
+    document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
+    document.documentElement.style.setProperty("--controller-view-p1", "block");
+  } else if (isHover == false && secondPlayer == "true") {
+    document.documentElement.style.setProperty(
+      "--game-layout",
+      "15dvh 70dvh 15dvh"
+    );
+    document.documentElement.style.setProperty("--controller-view-p1", "block");
+    document.documentElement.style.setProperty("--controller-view-p2", "block");
+  }
+}
+
+function whoIsPlaying() {
+  if (secondPlayer == "true") {
+    computerPaddle.paddleEle.style.display = "none";
+    secPlayerPaddle.paddleEle.style.display = "block";
+  } else if (secondPlayer == "false") {
+    computerPaddle.paddleEle.style.display = "block";
+    secPlayerPaddle.paddleEle.style.display = "none";
+  }
+}
 
 function handleMediaQueryChange(event) {
   if (event.matches) {
@@ -89,7 +167,11 @@ function isHoverFunction(h) {
 
 function isLose() {
   const rect = ball.rect();
-  return rect.top <= 0 || rect.bottom >= gameArea.offsetHeight;
+  const gmBound = gameArea.getBoundingClientRect();
+  return (
+    Math.floor(rect.top) <= Math.floor(gmBound.top) ||
+    Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)
+  );
 }
 
 function gameOver() {
@@ -126,12 +208,13 @@ function checkScore() {
 
 function scoreTable() {
   const rect = ball.rect();
-  if (rect.top <= 0) {
+  const gmBound = gameArea.getBoundingClientRect();
+  if (Math.floor(rect.top) <= Math.floor(gmBound.top)) {
     playerPoint.textContent =
       parseInt(playerPoint.textContent) < 9
         ? `0${parseInt(playerPoint.textContent) + 1}`
         : parseInt(playerPoint.textContent) + 1;
-  } else if (rect.bottom >= gameArea.offsetHeight) {
+  } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
     computerPoint.textContent =
       parseInt(computerPoint.textContent) < 9
         ? `0${parseInt(computerPoint.textContent) + 1}`
@@ -146,8 +229,19 @@ function scoreTable() {
 function updateBall(time) {
   if (lastTime) {
     const delta = time - lastTime;
-    ball.update(delta, gameArea, [playerPaddle.rect(), computerPaddle.rect()]);
-    computerPaddle.updateComputer(delta, ball.x, speed, gameArea);
+
+    if (secondPlayer == "false") {
+      computerPaddle.updateComputer(delta, ball.x, speed, gameArea);
+      ball.update(delta, gameArea, [
+        playerPaddle.rect(),
+        computerPaddle.rect(),
+      ]);
+    } else if (secondPlayer == "true") {
+      ball.update(delta, gameArea, [
+        playerPaddle.rect(),
+        secPlayerPaddle.rect(),
+      ]);
+    }
 
     if (isLose()) scoreTable();
   }
@@ -203,8 +297,8 @@ function restartgame() {
   computerPaddle.reset();
   playerPaddle.reset();
   playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
-  controllerLine.style.setProperty("--left", 50);
-  controllerBar.style.transform = "translate(-50%, -50%)";
+  p1controllerLine.style.setProperty("--left", 50);
+  p1controllerBar.style.transform = "translate(-50%, -50%)";
 
   // Score
   playerPoint.textContent = "00";
@@ -213,7 +307,7 @@ function restartgame() {
   // Game Menu
   close_and_open_gameOption();
 
-  // Rerun Ball
+  // Return Ball
   if (!id) {
     lastTime = null;
     id = window.requestAnimationFrame(updateBall);
@@ -251,8 +345,8 @@ function quiteGame() {
   computerPaddle.reset();
   playerPaddle.reset();
   playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
-  controllerLine.style.setProperty("--left", 50);
-  controllerBar.style.transform = "translate(-50%, -50%)";
+  p1controllerLine.style.setProperty("--left", 50);
+  p1controllerBar.style.transform = "translate(-50%, -50%)";
 
   // SECTION
   close_and_open_gameOption();
@@ -262,7 +356,8 @@ function quiteGame() {
   // LAYOUT
   if (isHover == false) {
     document.documentElement.style.setProperty("--game-layout", "100dvh");
-    document.documentElement.style.setProperty("--controller-view", "none");
+    document.documentElement.style.setProperty("--controller-view-p1", "none");
+    document.documentElement.style.setProperty("--controller-view-p2", "none");
   }
 }
 
@@ -296,55 +391,6 @@ function revertBtn(e) {
   gsap.to(magnetBtnTxt, { duration: 1, x: 0, y: 0, ease: "Elastic.easeOut" });
 }
 
-function startGame() {
-  // No of Round
-  roundNo = no_of_round.options[no_of_round.selectedIndex];
-
-  // Start Section
-  startSection.classList.add("start--opacity");
-  setTimeout(() => {
-    startSection.classList.add("start--hide");
-  }, 320);
-
-  // Help & Setting Btn
-  helpBtn.classList.add("help__btn--hide");
-  settingBtn.classList.remove("setting__btn--opacity");
-
-  // Score
-  totalPoint.forEach((item) => {
-    if (roundNo.value == -1) {
-      item.textContent = "";
-      document
-        .querySelectorAll(".point__slash")
-        .forEach((item) => (item.style.display = "none"));
-    } else {
-      document
-        .querySelectorAll(".point__slash")
-        .forEach((item) => (item.style.display = "block"));
-      item.textContent = `${roundNo.value}`;
-    }
-  });
-  playerScore.classList.remove("score--opacity");
-  computerScore.classList.remove("score--opacity");
-
-  // Ball
-  id = window.requestAnimationFrame(updateBall);
-  secondBall.ballEle.style.display = "none";
-  window.cancelAnimationFrame(idSec);
-
-  // Player Controller Access
-  controllerAccess = true;
-
-  // Computer Paddle Speed
-  randomSpeed();
-
-  // Touch Screen Layout
-  if (isHover == false) {
-    document.documentElement.style.setProperty("--game-layout", "85dvh 15dvh");
-    document.documentElement.style.setProperty("--controller-view", "block");
-  }
-}
-
 function instructions() {
   instructionSection.classList.toggle("help--hide");
   closeBtn.classList.toggle("close__btn--hide");
@@ -362,14 +408,14 @@ function instructionsAnim() {
   tl.to(listFirst, {
     x: 0,
     opacity: 1,
-    stagger: 0.3,
+    stagger: 0.2,
     ease: "sine.out",
   });
 
   tl.to(listSecond, {
     x: 0,
     opacity: 1,
-    stagger: 0.3,
+    stagger: 0.2,
     ease: "sine.out",
   });
 }
@@ -408,25 +454,50 @@ gameArea.addEventListener("mousemove", function (e) {
   playerPaddle.updatePlayerPaddle(value, gameArea);
 });
 
-controllerBar.addEventListener("touchstart", function (e) {
+p1controllerBar.addEventListener("touchstart", function (e) {
   e.preventDefault();
 });
 
-controllerBar.addEventListener("touchmove", function (e) {
+p1controllerBar.addEventListener("touchmove", function (e) {
   e.preventDefault();
 
   const t = e.targetTouches;
   if (t.length == 1) {
     const details = t[0];
     const distanceFromBorder = details.clientX;
-    const gapBetweenBorder = controllerLine.getBoundingClientRect().left;
+    const gapBetweenBorder = p1controllerLine.getBoundingClientRect().left;
     const diff = distanceFromBorder - gapBetweenBorder;
-    if (diff >= 0 && diff <= controllerLine.offsetWidth) {
-      const adjustedX = Math.ceil((diff / controllerLine.offsetWidth) * 100);
-      controllerLine.style.setProperty("--left", adjustedX);
+    if (diff >= 0 && diff <= p1controllerLine.offsetWidth) {
+      const adjustedX = Math.ceil((diff / p1controllerLine.offsetWidth) * 100);
+      p1controllerLine.style.setProperty("--left", adjustedX);
       playerPaddle.updatePaddleForTouchDevice(
         adjustedX,
-        controllerBar,
+        p1controllerBar,
+        gameArea
+      );
+    }
+  }
+});
+
+p2controllerBar.addEventListener("touchstart", function (e) {
+  e.preventDefault();
+});
+
+p2controllerArea.addEventListener("touchmove", function (e) {
+  e.preventDefault();
+
+  const t = e.targetTouches;
+  if (t.length == 1) {
+    const details = t[0];
+    const distanceFromBorder = details.clientX;
+    const gapBetweenBorder = p2controllerLine.getBoundingClientRect().left;
+    const diff = distanceFromBorder - gapBetweenBorder;
+    if (diff >= 0 && diff <= p2controllerLine.offsetWidth) {
+      const adjustedX = Math.ceil((diff / p2controllerLine.offsetWidth) * 100);
+      p2controllerLine.style.setProperty("--left", adjustedX);
+      secPlayerPaddle.updatePaddleForTouchDevice(
+        adjustedX,
+        p2controllerBar,
         gameArea
       );
     }

@@ -106,7 +106,8 @@
   left: calc(var(--position) * 1vw);
   transform: translate(-50%, 0%);
 
-  &__computer {
+  &__computer,
+  &__playerSec {
     top: var(--paddle-computer-top);
   }
 
@@ -162,10 +163,15 @@
 
   background-color: var(--area-bk-clr);
   position: relative;
-  border-top: 2px solid #000;
-  display: var(--controller-view);
 
-  &__player {
+  &__playerone {
+    display: var(--controller-view-p1);
+    border-top: 2px solid #000;
+  }
+
+  &__playersec {
+    border-bottom: 2px solid #000;
+    display: var(--controller-view-p2);
   }
 
   &__line {
@@ -178,7 +184,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
 
+  &__line--playerone {
+    --left: 50;
+  }
+
+  &__line--playersec {
     --left: 50;
   }
 

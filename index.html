@@ -77,14 +77,14 @@
           <select class="customize__select" name="" id="competetitor">
             <option
               class="customize__option option__against"
-              value="Computer"
+              value="false"
               selected
             >
               Computer
             </option>
             <option
               class="customize__option option__against"
-              value="Player"
+              value="true"
               class="customize__span"
             >
               Player
@@ -162,6 +162,13 @@
     </section>
 
     <main class="main">
+      <div class="controller controller__playersec">
+        <div class="controller__line controller__line--playersec">
+          <span class="controller__bar controller__bar--playersec">
+            <img src="Images/scroll-svg.svg" alt="" draggable="false" />
+          </span>
+        </div>
+      </div>
       <!-- GAME AREA -->
       <section class="area">
         <span class="icon__btn setting__btn setting__btn--opacity">
@@ -177,6 +184,7 @@
           ><span class="point point__total">05</span>
         </div>
         <div class="paddle paddle__computer"></div>
+        <div class="paddle paddle__playerSec"></div>
         <div class="ball"></div>
         <div class="showcase__ball"></div>
         <div class="paddle paddle__user"></div>
@@ -190,9 +198,9 @@
           <h2 class="secondary--title">You win</h2>
         </div>
       </section>
-      <div class="controller controller__player">
-        <div class="controller__line">
-          <span class="controller__bar">
+      <div class="controller controller__playerone">
+        <div class="controller__line controller__line--playerone">
+          <span class="controller__bar controller__bar--playerone">
             <img src="Images/scroll-svg.svg" alt="" draggable="false" />
           </span>
         </div>

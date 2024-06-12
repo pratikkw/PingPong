@@ -64,7 +64,8 @@ textarea {
   --help-icon-top: 1.25rem;
   --help-icon-right: 1.25rem;
   --game-layout: 100dvh;
-  --controller-view: none; }
+  --controller-view-p1: none;
+  --controller-view-p2: none; }
 
 body {
   min-height: 100dvh;
@@ -165,7 +166,7 @@ body {
   position: absolute;
   left: calc(var(--position) * 1vw);
   transform: translate(-50%, 0%); }
-  .paddle__computer {
+  .paddle__computer, .paddle__playerSec {
     top: var(--paddle-computer-top); }
   .paddle__user {
     bottom: var(--paddle-user-bottom); }
@@ -205,9 +206,13 @@ body {
 .controller {
   --controller-bar-width: 3.5rem;
   background-color: var(--area-bk-clr);
-  position: relative;
-  border-top: 2px solid #000;
-  display: var(--controller-view); }
+  position: relative; }
+  .controller__playerone {
+    display: var(--controller-view-p1);
+    border-top: 2px solid #000; }
+  .controller__playersec {
+    border-bottom: 2px solid #000;
+    display: var(--controller-view-p2); }
   .controller__line {
     width: 75vw;
     height: 0.75vh;
@@ -216,7 +221,10 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .controller__line--playerone {
+    --left: 50; }
+  .controller__line--playersec {
     --left: 50; }
   .controller__bar {
     width: var(--controller-bar-width);
@@ -386,6 +394,12 @@ body {
 .play__btn--deactive {
   opacity: 0.3;
   pointer-events: none; }
+
+.paddle__playerSec--hide {
+  display: none; }
+
+.paddle__computer--hide {
+  display: none; }
 
 @media only screen and (hover: hover) {
   .start__btn {
