@@ -120,11 +120,15 @@
               The game continues until a player reaches the predetermined number
               of points.
             </li>
+            <li class="list list__one">
+              The player who reaches the 10 number of points first wins the
+              game.
+            </li>
           </ul>
         </div>
 
         <div class="txt__box grid">
-          <span class="txtbox--primary-title">How to play</span>
+          <span class="txtbox--primary-title">How to play (For PC)</span>
           <ul class="lists">
             <li class="list list__two">
               Move your mouse left or right to control the horizontal movement
@@ -134,9 +138,21 @@
               When the ball makes contact with your paddle, it will bounce back
               into the play area.
             </li>
-            <li class="list list__two">
-              The player who reaches the 10 number of points first wins the
-              game.
+          </ul>
+        </div>
+
+        <div class="txt__box grid">
+          <span class="txtbox--primary-title"
+            >How to play (For Touch Devices)</span
+          >
+          <ul class="lists">
+            <li class="list list__three">
+              Move your mouse left or right to control the horizontal movement
+              of your paddle.
+            </li>
+            <li class="list list__three">
+              When the ball makes contact with your paddle, it will bounce back
+              into the play area.
             </li>
           </ul>
         </div>
@@ -181,16 +197,27 @@
           ></ion-icon>
         </span>
 
+        <!-- Computer Score -->
         <div class="score score__computer score--opacity">
           <span class="point point__computer">00</span>
           <span class="point__slash">/</span
           ><span class="point point__total">05</span>
         </div>
+
+        <!-- Second Player Score -->
+        <div class="score score__playerSec score--opacity">
+          <span class="point point__playerSec">00</span>
+          <span class="point__slash">/</span
+          ><span class="point point__total">05</span>
+        </div>
+
         <div class="paddle paddle__computer"></div>
         <div class="paddle paddle__playerSec"></div>
         <div class="ball"></div>
         <div class="showcase__ball"></div>
         <div class="paddle paddle__user"></div>
+
+        <!-- First Player Score -->
         <div class="score score__player score--opacity">
           <span class="point point__player">00</span>
           <span class="point__slash">/</span

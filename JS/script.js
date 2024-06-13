@@ -22,8 +22,10 @@ const quiteBtn = document.querySelector(".quite__btn");
 const listFirst = document.querySelectorAll(".list__one");
 const listSecond = document.querySelectorAll(".list__two");
 const playerScore = document.querySelector(".score__player");
+const playerSecScore = document.querySelector(".score__playerSec");
 const computerScore = document.querySelector(".score__computer");
 const playerPoint = document.querySelector(".point__player");
+const playerSecPoint = document.querySelector(".point__playerSec");
 const computerPoint = document.querySelector(".point__computer");
 const totalPoint = document.querySelectorAll(".point__total");
 const p1controllerArea = document.querySelector(".controller__playerone");
@@ -53,27 +55,142 @@ let id;
 let idSec;
 let lastTime;
 let lastTimeTwo;
-let controllerAccess = false;
 let SPEEDArray = [0.01, 0.0125, 0.015, 0.02];
 let speed;
 let roundNo;
 let gameEnd = false;
 let secondPlayer;
 
-window.addEventListener("load", function () {
-  isHoverFunction(isHover);
-  idSec = window.requestAnimationFrame(updateSecBall);
-});
+// Disable Zoom & Refresh effect in Touch Devices
+main.addEventListener(
+  "touchmove",
+  function (event) {
+    if (event.scale !== 1) {
+      event.preventDefault();
+    }
+  },
+  { passive: false }
+);
+// -------------------------
 
+// Get random Ball Speed.
+function randomSpeed() {
+  const num = Math.floor(Math.random() * 4);
+  speed = SPEEDArray[num];
+}
+// -------------------------
+
+// --> Change Ball Velocity Array Accoring to viewport
+function handleMediaQueryChange(event) {
+  if (event.matches) {
+    SPEEDArray = [0.0075, 0.008, 0.0081, 0.009];
+  }
+}
+// -------------------------
+
+// --> For Magnet Btn Effect & Select Play Against.
+function isHoverFunction(h) {
+  if (h) {
+    magnetBtn.addEventListener("mousemove", moveBtn);
+    magnetBtn.addEventListener("mouseleave", revertBtn);
+  } else {
+    customizePlayer.classList.remove("customize__vs--hide");
+  }
+}
+// -------------------------
+
+// --> Adjust Layout According to who is playing.
+function whoIsPlaying() {
+  if (secondPlayer == "true") {
+    computerPaddle.paddleEle.style.display = "none";
+    secPlayerPaddle.paddleEle.style.display = "block";
+  } else if (secondPlayer == "false") {
+    computerPaddle.paddleEle.style.display = "block";
+    secPlayerPaddle.paddleEle.style.display = "none";
+  }
+}
+// -------------------------
+
+// --> Instruction, close & help Btn Section Open & Close
+function instructions() {
+  instructionSection.classList.toggle("help--hide");
+  closeBtn.classList.toggle("close__btn--hide");
+  helpBtn.classList.toggle("help__btn--hide");
+}
+// -------------------------
+
+// --> Announce Result
+function announceResult(txt) {
+  result.classList.remove("game__result--hide");
+  resultTxt.textContent = txt;
+}
+// -------------------------
+
+// --> Open & Close Game Menu
+function close_and_open_gameOption() {
+  gameOptionSection.classList.toggle("setting--hide");
+}
+// -------------------------
+
+// --> Game Over
+function gameOver() {
+  if (gameEnd) {
+    window.cancelAnimationFrame(id);
+    id = null;
+    ball.ballEle.style.display = "none";
+    computerPaddle.reset();
+    playBtn.classList.add("play__btn--deactive");
+  }
+}
+// -------------------------
+
+// --> Counting Score
+function scoreTable() {
+  const rect = ball.rect();
+  const gmBound = gameArea.getBoundingClientRect();
+
+  if (secondPlayer == "true") {
+    if (Math.floor(rect.top) <= Math.floor(gmBound.top)) {
+      playerPoint.textContent =
+        parseInt(playerPoint.textContent) < 9
+          ? `0${parseInt(playerPoint.textContent) + 1}`
+          : parseInt(playerPoint.textContent) + 1;
+    } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
+      playerSecPoint.textContent =
+        parseInt(playerSecPoint.textContent) < 9
+          ? `0${parseInt(playerSecPoint.textContent) + 1}`
+          : parseInt(playerSecPoint.textContent) + 1;
+    }
+  } else if (secondPlayer == "false") {
+    if (Math.floor(rect.top) <= Math.floor(gmBound.top)) {
+      playerPoint.textContent =
+        parseInt(playerPoint.textContent) < 9
+          ? `0${parseInt(playerPoint.textContent) + 1}`
+          : parseInt(playerPoint.textContent) + 1;
+    } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
+      computerPoint.textContent =
+        parseInt(computerPoint.textContent) < 9
+          ? `0${parseInt(computerPoint.textContent) + 1}`
+          : parseInt(computerPoint.textContent) + 1;
+    }
+  }
+  ball.reset();
+  computerPaddle.reset();
+  randomSpeed();
+  checkScore();
+}
+// -------------------------
+
+// --> Start Game
 function startGame() {
-  // No of Round
+  // Get Number of Rounds
   roundNo = no_of_round.options[no_of_round.selectedIndex];
 
   // Play Against
   secondPlayer = playagainst.options[playagainst.selectedIndex].value;
   whoIsPlaying();
 
-  // Start Section
+  // Start Section Hide
   startSection.classList.add("start--opacity");
   setTimeout(() => {
     startSection.classList.add("start--hide");
@@ -97,16 +214,18 @@ function startGame() {
       item.textContent = `${roundNo.value}`;
     }
   });
-  playerScore.classList.remove("score--opacity");
-  computerScore.classList.remove("score--opacity");
+  if (secondPlayer == "true") {
+    playerScore.classList.remove("score--opacity");
+    playerSecScore.classList.remove("score--opacity");
+  } else if (secondPlayer == "false") {
+    computerScore.classList.remove("score--opacity");
+    playerScore.classList.remove("score--opacity");
+  }
 
   // Ball
   id = window.requestAnimationFrame(updateBall);
   secondBall.ballEle.style.display = "none";
   window.cancelAnimationFrame(idSec);
-
-  // Player Controller Access
-  controllerAccess = true;
 
   // Computer Paddle Speed
   randomSpeed();
@@ -124,108 +243,9 @@ function startGame() {
     document.documentElement.style.setProperty("--controller-view-p2", "block");
   }
 }
+// -------------------------
 
-function whoIsPlaying() {
-  if (secondPlayer == "true") {
-    computerPaddle.paddleEle.style.display = "none";
-    secPlayerPaddle.paddleEle.style.display = "block";
-  } else if (secondPlayer == "false") {
-    computerPaddle.paddleEle.style.display = "block";
-    secPlayerPaddle.paddleEle.style.display = "none";
-  }
-}
-
-function handleMediaQueryChange(event) {
-  if (event.matches) {
-    SPEEDArray = [0.0075, 0.008, 0.0081, 0.009];
-  }
-}
-
-function randomSpeed() {
-  const num = Math.floor(Math.random() * 4);
-  speed = SPEEDArray[num];
-}
-
-main.addEventListener(
-  "touchmove",
-  function (event) {
-    if (event.scale !== 1) {
-      event.preventDefault();
-    }
-  },
-  { passive: false }
-);
-
-function isHoverFunction(h) {
-  if (h) {
-    magnetBtn.addEventListener("mousemove", moveBtn);
-    magnetBtn.addEventListener("mouseleave", revertBtn);
-  } else {
-    customizePlayer.classList.remove("customize__vs--hide");
-  }
-}
-
-function isLose() {
-  const rect = ball.rect();
-  const gmBound = gameArea.getBoundingClientRect();
-  return (
-    Math.floor(rect.top) <= Math.floor(gmBound.top) ||
-    Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)
-  );
-}
-
-function gameOver() {
-  if (gameEnd) {
-    computerPaddle.reset();
-    ball.ballEle.style.display = "none";
-    playBtn.classList.add("play__btn--deactive");
-  }
-}
-
-function announceResult(txt) {
-  result.classList.remove("game__result--hide");
-  resultTxt.textContent = txt;
-}
-
-function checkScore() {
-  const cmpScore = parseInt(computerPoint.textContent);
-  const playerScore = parseInt(playerPoint.textContent);
-
-  if (roundNo.value == cmpScore) {
-    announceResult("You Lose");
-    window.cancelAnimationFrame(id);
-    id = null;
-    gameEnd = true;
-    gameOver();
-  } else if (roundNo.value == playerScore) {
-    announceResult("You Win");
-    window.cancelAnimationFrame(id);
-    id = null;
-    gameEnd = true;
-    gameOver();
-  }
-}
-
-function scoreTable() {
-  const rect = ball.rect();
-  const gmBound = gameArea.getBoundingClientRect();
-  if (Math.floor(rect.top) <= Math.floor(gmBound.top)) {
-    playerPoint.textContent =
-      parseInt(playerPoint.textContent) < 9
-        ? `0${parseInt(playerPoint.textContent) + 1}`
-        : parseInt(playerPoint.textContent) + 1;
-  } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
-    computerPoint.textContent =
-      parseInt(computerPoint.textContent) < 9
-        ? `0${parseInt(computerPoint.textContent) + 1}`
-        : parseInt(computerPoint.textContent) + 1;
-  }
-  ball.reset();
-  computerPaddle.reset();
-  randomSpeed();
-  checkScore();
-}
-
+// --> Update Ball
 function updateBall(time) {
   if (lastTime) {
     const delta = time - lastTime;
@@ -249,7 +269,9 @@ function updateBall(time) {
   id = window.requestAnimationFrame(updateBall);
   checkScore();
 }
+// -------------------------
 
+// --> Update Showcase Ball
 function updateSecBall(time) {
   if (lastTimeTwo) {
     const delta = time - lastTimeTwo;
@@ -258,27 +280,9 @@ function updateSecBall(time) {
   lastTimeTwo = time;
   idSec = window.requestAnimationFrame(updateSecBall);
 }
+// -------------------------
 
-function close_and_open_gameOption() {
-  gameOptionSection.classList.toggle("setting--hide");
-}
-
-function pauseBall() {
-  close_and_open_gameOption();
-  if (id) {
-    window.cancelAnimationFrame(id);
-    id = null;
-  }
-}
-
-function resumeBall() {
-  close_and_open_gameOption();
-  if (!id) {
-    lastTime = null;
-    id = window.requestAnimationFrame(updateBall);
-  }
-}
-
+// --> Restart Game
 function restartgame() {
   // BALL
   ball.reset();
@@ -299,9 +303,14 @@ function restartgame() {
   playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
   p1controllerLine.style.setProperty("--left", 50);
   p1controllerBar.style.transform = "translate(-50%, -50%)";
+  secPlayerPaddle.reset();
+  secPlayerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
+  p2controllerLine.style.setProperty("--left", 50);
+  p2controllerBar.style.transform = "translate(-50%, -50%)";
 
   // Score
   playerPoint.textContent = "00";
+  playerSecPoint.textContent = "00";
   computerPoint.textContent = "00";
 
   // Game Menu
@@ -313,12 +322,36 @@ function restartgame() {
     id = window.requestAnimationFrame(updateBall);
   }
 }
+// -------------------------
 
+// --> Resume Game
+function resumeBall() {
+  close_and_open_gameOption();
+  if (!id) {
+    lastTime = null;
+    id = window.requestAnimationFrame(updateBall);
+  }
+}
+// -------------------------
+
+// --> Pause Game
+function pauseBall() {
+  close_and_open_gameOption();
+  if (id) {
+    window.cancelAnimationFrame(id);
+    id = null;
+  }
+}
+// -------------------------
+
+// Quite Game
 function quiteGame() {
   // Score
   playerPoint.textContent = "00";
+  playerSecPoint.textContent = "00";
   computerPoint.textContent = "00";
   playerScore.classList.add("score--opacity");
+  playerSecScore.classList.add("score--opacity");
   computerScore.classList.add("score--opacity");
 
   // BTNs
@@ -341,12 +374,15 @@ function quiteGame() {
   idSec = window.requestAnimationFrame(updateSecBall);
 
   // PADDLE
-  controllerAccess = false;
   computerPaddle.reset();
   playerPaddle.reset();
   playerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
   p1controllerLine.style.setProperty("--left", 50);
   p1controllerBar.style.transform = "translate(-50%, -50%)";
+  secPlayerPaddle.reset();
+  secPlayerPaddle.paddleEle.style.transform = "translate(-50%, -50%)";
+  p2controllerLine.style.setProperty("--left", 50);
+  p2controllerBar.style.transform = "translate(-50%, -50%)";
 
   // SECTION
   close_and_open_gameOption();
@@ -360,7 +396,46 @@ function quiteGame() {
     document.documentElement.style.setProperty("--controller-view-p2", "none");
   }
 }
+// -------------------------
 
+// Check for goal
+function isLose() {
+  const rect = ball.rect();
+  const gmBound = gameArea.getBoundingClientRect();
+  return (
+    Math.floor(rect.top) <= Math.floor(gmBound.top) ||
+    Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)
+  );
+}
+// -------------------------
+
+// --> Check if player reaches the predefined point
+function checkScore() {
+  const cmpScore = parseInt(computerPoint.textContent);
+  const playerScore = parseInt(playerPoint.textContent);
+  const secondPlayerScore = parseInt(playerSecPoint.textContent);
+
+  if (roundNo.value == cmpScore && secondPlayer == "false") {
+    gameEnd = true;
+    announceResult("You Lose");
+    gameOver();
+  } else if (roundNo.value == playerScore && secondPlayer == "false") {
+    gameEnd = true;
+    announceResult("You Win");
+    gameOver();
+  } else if (roundNo.value == playerScore && secondPlayer == "true") {
+    gameEnd = true;
+    announceResult("Player First Win");
+    gameOver();
+  } else if (roundNo.value == secondPlayerScore && secondPlayer == "true") {
+    gameEnd = true;
+    announceResult("Player Second Win");
+    gameOver();
+  }
+}
+// -------------------------
+
+// --> Magnet Btn
 function moveBtn(e) {
   const btnValue = 45;
   const txtValue = 90;
@@ -385,18 +460,16 @@ function moveBtn(e) {
     ease: "power4.out",
   });
 }
+// -------------------------
 
+// --> Back to initial position Magnet Btn
 function revertBtn(e) {
   gsap.to(magnetBtn, { duration: 1, x: 0, y: 0, ease: "Elastic.easeOut" });
   gsap.to(magnetBtnTxt, { duration: 1, x: 0, y: 0, ease: "Elastic.easeOut" });
 }
+// -------------------------
 
-function instructions() {
-  instructionSection.classList.toggle("help--hide");
-  closeBtn.classList.toggle("close__btn--hide");
-  helpBtn.classList.toggle("help__btn--hide");
-}
-
+// --> Text Animation
 function instructionsAnim() {
   const tl = gsap.timeline({});
 
@@ -419,7 +492,9 @@ function instructionsAnim() {
     ease: "sine.out",
   });
 }
+// -------------------------
 
+// --> Send back the Text on initial Position
 function resetInstructionsAnim() {
   gsap.set([listFirst, listSecond], {
     x: 200,
@@ -427,8 +502,14 @@ function resetInstructionsAnim() {
     duration: 0,
   });
 }
+// -------------------------
 
 // EventListeners
+window.addEventListener("load", function () {
+  isHoverFunction(isHover);
+  idSec = window.requestAnimationFrame(updateSecBall);
+});
+
 magnetBtn.addEventListener("click", startGame);
 
 helpBtn.addEventListener("click", function () {

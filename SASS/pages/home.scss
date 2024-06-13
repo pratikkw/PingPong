@@ -35,6 +35,7 @@
   --setting-top: 1.25rem;
   --setting-right: 1.25rem;
   --score-computer-right: 0.75rem;
+  --score-playerSec-right: 0.75rem;
   --score-player-left: 0.75rem;
 
   // FONT
@@ -88,7 +89,8 @@
     transform: translate(-50%, -50%);
     z-index: var(--game-result-index);
 
-    text-wrap: nowrap;
+    text-align: center;
+    text-wrap: balance;
     color: var(--white-clr);
     font-size: var(--game-result-fs);
   }
@@ -100,7 +102,7 @@
   background-color: var(--paddle-clr);
   height: var(--paddle-height);
   width: var(--paddle-width);
-  border-radius: 0.25rem;
+  // border-radius: 0.25rem;
 
   position: absolute;
   left: calc(var(--position) * 1vw);
@@ -144,6 +146,13 @@
     top: 45%;
     right: var(--score-computer-right);
     transform: translate(0%, -50%);
+  }
+
+  &__playerSec {
+    top: 45%;
+    right: var(--score-playerSec-right);
+    transform: translate(0%, 50%);
+    rotate: 180deg;
   }
 
   &__player {
