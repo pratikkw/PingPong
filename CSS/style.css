@@ -345,7 +345,8 @@ body {
       color: var(--white-clr); }
 
 .icon__btn {
-  cursor: pointer; }
+  cursor: pointer;
+  transition: opacity 0.3s ease-in; }
 
 .primary--title {
   font-size: var(--primary-title-fs); }
@@ -427,7 +428,9 @@ body {
     .start__btn:hover::after {
       height: 100%;
       bottom: 0;
-      top: auto; } }
+      top: auto; }
+  .icon__btn:hover {
+    opacity: 0.4; } }
 
 @media only screen and (hover: none) {
   .start__btn {

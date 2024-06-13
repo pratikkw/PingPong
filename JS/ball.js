@@ -1,5 +1,6 @@
 const INITIAL_VELOCITY = 0.025;
 const VELOCITY_INCREASE = 0.0000025;
+const paddleHit = new Audio("../SoundEffects/paddle-hit.wav");
 
 export default class Ball {
   constructor(ballEle) {
@@ -54,6 +55,7 @@ export default class Ball {
 
     if (arr.some((r) => isCollision(rect, r))) {
       this.direction.y *= -1;
+      paddleHit.play();
     }
   }
 

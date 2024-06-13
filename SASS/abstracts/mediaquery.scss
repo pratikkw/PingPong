@@ -25,6 +25,10 @@
       }
     }
   }
+
+  .icon__btn:hover {
+    opacity: 0.4;
+  }
 }
 
 @media only screen and (hover: none) {

@@ -21,6 +21,7 @@ const quiteBtn = document.querySelector(".quite__btn");
 // COMPONENTs
 const listFirst = document.querySelectorAll(".list__one");
 const listSecond = document.querySelectorAll(".list__two");
+const listThird = document.querySelectorAll(".list__three");
 const playerScore = document.querySelector(".score__player");
 const playerSecScore = document.querySelector(".score__playerSec");
 const computerScore = document.querySelector(".score__computer");
@@ -40,7 +41,21 @@ const playagainst = document.getElementById("competetitor");
 const result = document.querySelector(".game__result");
 const resultTxt = document.querySelector(".game__result h2");
 
+// Sounds
+const gameStart = new Audio("../SoundEffects/gameStart.wav");
+const ballShotFromCenter = new Audio(
+  "../SoundEffects/ball-shot-from-center.wav"
+);
+const loss = new Audio("../SoundEffects/loss-over-cmp.wav");
+const play = new Audio("../SoundEffects/play.wav");
+const pause = new Audio("../SoundEffects/pause.wav");
+const win = new Audio("../SoundEffects/win-over-cmp.wav");
+const shortWin = new Audio("../SoundEffects/short-win.wav");
+const paddleHit = new Audio("../SoundEffects/paddle-hit.wav");
+const exit = new Audio("../SoundEffects/exit.wav");
+
 // Global Variables
+const tl = gsap.timeline({});
 const ball = new Ball(document.querySelector(".ball"));
 const secondBall = new Ball(document.querySelector(".showcase__ball"));
 const playerPaddle = new Paddle(document.querySelector(".paddle__user"));
@@ -60,8 +75,33 @@ let speed;
 let roundNo;
 let gameEnd = false;
 let secondPlayer;
+let animationStop = false;
 
-// Disable Zoom & Refresh effect in Touch Devices
+// --> Sound Effects
+function soundEffect(soundType) {
+  if (soundType == "startGame") {
+    gameStart.play();
+  } else if (soundType == "ballShot") {
+    ballShotFromCenter.play();
+  } else if (soundType == "pause") {
+    pause.play();
+  } else if (soundType == "play") {
+    play.play();
+  } else if (soundType == "win") {
+    win.play();
+  } else if (soundType == "loss") {
+    loss.play();
+  } else if (soundType == "paddlehit") {
+    paddleHit.play();
+  } else if (soundType == "goal") {
+    shortWin.play();
+  } else if (soundType == "exit") {
+    exit.play();
+  }
+}
+// -------------------------
+
+// --> Disable Zoom & Refresh effect in Touch Devices
 main.addEventListener(
   "touchmove",
   function (event) {
@@ -73,7 +113,7 @@ main.addEventListener(
 );
 // -------------------------
 
-// Get random Ball Speed.
+// --> Get random Ball Speed.
 function randomSpeed() {
   const num = Math.floor(Math.random() * 4);
   speed = SPEEDArray[num];
@@ -155,11 +195,13 @@ function scoreTable() {
         parseInt(playerPoint.textContent) < 9
           ? `0${parseInt(playerPoint.textContent) + 1}`
           : parseInt(playerPoint.textContent) + 1;
+      soundEffect("goal");
     } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
       playerSecPoint.textContent =
         parseInt(playerSecPoint.textContent) < 9
           ? `0${parseInt(playerSecPoint.textContent) + 1}`
           : parseInt(playerSecPoint.textContent) + 1;
+      soundEffect("goal");
     }
   } else if (secondPlayer == "false") {
     if (Math.floor(rect.top) <= Math.floor(gmBound.top)) {
@@ -167,11 +209,13 @@ function scoreTable() {
         parseInt(playerPoint.textContent) < 9
           ? `0${parseInt(playerPoint.textContent) + 1}`
           : parseInt(playerPoint.textContent) + 1;
+      soundEffect("goal");
     } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
       computerPoint.textContent =
         parseInt(computerPoint.textContent) < 9
           ? `0${parseInt(computerPoint.textContent) + 1}`
           : parseInt(computerPoint.textContent) + 1;
+      soundEffect("goal");
     }
   }
   ball.reset();
@@ -242,6 +286,9 @@ function startGame() {
     document.documentElement.style.setProperty("--controller-view-p1", "block");
     document.documentElement.style.setProperty("--controller-view-p2", "block");
   }
+
+  // Sound
+  soundEffect("startGame");
 }
 // -------------------------
 
@@ -321,6 +368,9 @@ function restartgame() {
     lastTime = null;
     id = window.requestAnimationFrame(updateBall);
   }
+
+  // Sound
+  soundEffect("startGame");
 }
 // -------------------------
 
@@ -337,6 +387,7 @@ function resumeBall() {
 // --> Pause Game
 function pauseBall() {
   close_and_open_gameOption();
+  soundEffect("pause");
   if (id) {
     window.cancelAnimationFrame(id);
     id = null;
@@ -395,6 +446,9 @@ function quiteGame() {
     document.documentElement.style.setProperty("--controller-view-p1", "none");
     document.documentElement.style.setProperty("--controller-view-p2", "none");
   }
+
+  // Sound
+  exit.play();
 }
 // -------------------------
 
@@ -419,18 +473,22 @@ function checkScore() {
     gameEnd = true;
     announceResult("You Lose");
     gameOver();
+    soundEffect("loss");
   } else if (roundNo.value == playerScore && secondPlayer == "false") {
     gameEnd = true;
     announceResult("You Win");
     gameOver();
+    soundEffect("win");
   } else if (roundNo.value == playerScore && secondPlayer == "true") {
     gameEnd = true;
     announceResult("Player First Win");
     gameOver();
+    soundEffect("win");
   } else if (roundNo.value == secondPlayerScore && secondPlayer == "true") {
     gameEnd = true;
     announceResult("Player Second Win");
     gameOver();
+    soundEffect("win");
   }
 }
 // -------------------------
@@ -471,9 +529,8 @@ function revertBtn(e) {
 
 // --> Text Animation
 function instructionsAnim() {
-  const tl = gsap.timeline({});
-
-  gsap.set([listFirst, listSecond], {
+  if (animationStop) return;
+  gsap.set([listFirst, listSecond, listThird], {
     x: 200,
     opacity: 0,
   });
@@ -491,15 +548,12 @@ function instructionsAnim() {
     stagger: 0.2,
     ease: "sine.out",
   });
-}
-// -------------------------
 
-// --> Send back the Text on initial Position
-function resetInstructionsAnim() {
-  gsap.set([listFirst, listSecond], {
-    x: 200,
-    opacity: 0,
-    duration: 0,
+  tl.to(listThird, {
+    x: 0,
+    opacity: 1,
+    stagger: 0.2,
+    ease: "sine.out",
   });
 }
 // -------------------------
@@ -519,7 +573,7 @@ helpBtn.addEventListener("click", function () {
 
 closeBtn.addEventListener("click", function () {
   instructions();
-  resetInstructionsAnim();
+  animationStop = true;
 });
 
 settingBtn.addEventListener("click", pauseBall);
