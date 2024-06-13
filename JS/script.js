@@ -11,6 +11,9 @@ const gameOptionSection = document.querySelector(".setting");
 // BTNs
 const magnetBtn = document.getElementById("magnet__btn");
 const magnetBtnTxt = document.getElementById("magnet__txt");
+const volumeBox = document.querySelector(".volume");
+const volumeBtn = document.querySelectorAll(".volume__btn");
+const volume_mutedBtn = document.querySelectorAll(".volume-muted__btn");
 const helpBtn = document.querySelector(".help__btn");
 const closeBtn = document.querySelector(".close__btn");
 const settingBtn = document.querySelector(".setting__btn");
@@ -53,6 +56,7 @@ const win = new Audio("../SoundEffects/win-over-cmp.wav");
 const shortWin = new Audio("../SoundEffects/short-win.wav");
 const paddleHit = new Audio("../SoundEffects/paddle-hit.wav");
 const exit = new Audio("../SoundEffects/exit.wav");
+const volume = new Audio("../SoundEffects/muted.wav");
 
 // Global Variables
 const tl = gsap.timeline({});
@@ -76,9 +80,11 @@ let roundNo;
 let gameEnd = false;
 let secondPlayer;
 let animationStop = false;
+let mute = true;
 
 // --> Sound Effects
 function soundEffect(soundType) {
+  if (!mute) return;
   if (soundType == "startGame") {
     gameStart.play();
   } else if (soundType == "ballShot") {
@@ -98,6 +104,30 @@ function soundEffect(soundType) {
   } else if (soundType == "exit") {
     exit.play();
   }
+}
+// -------------------------
+
+// --> Mute & Unmute
+function volumeEnable() {
+  mute = false;
+  volumeBtn.forEach((item) => {
+    item.classList.add("volume--hide");
+  });
+  volume_mutedBtn.forEach((item) => {
+    item.classList.remove("volume--hide");
+  });
+  volume.play();
+}
+
+function volumeDisable() {
+  mute = true;
+  volumeBtn.forEach((item) => {
+    item.classList.remove("volume--hide");
+  });
+  volume_mutedBtn.forEach((item) => {
+    item.classList.add("volume--hide");
+  });
+  volume.play();
 }
 // -------------------------
 
@@ -240,7 +270,8 @@ function startGame() {
     startSection.classList.add("start--hide");
   }, 320);
 
-  // Help & Setting Btn
+  // Volume, Help & Setting Btn
+  volumeBox.classList.add("volume__box--hide");
   helpBtn.classList.add("help__btn--hide");
   settingBtn.classList.remove("setting__btn--opacity");
 
@@ -299,10 +330,12 @@ function updateBall(time) {
 
     if (secondPlayer == "false") {
       computerPaddle.updateComputer(delta, ball.x, speed, gameArea);
-      ball.update(delta, gameArea, [
-        playerPaddle.rect(),
-        computerPaddle.rect(),
-      ]);
+      ball.update(
+        delta,
+        gameArea,
+        [playerPaddle.rect(), computerPaddle.rect()],
+        mute
+      );
     } else if (secondPlayer == "true") {
       ball.update(delta, gameArea, [
         playerPaddle.rect(),
@@ -406,9 +439,10 @@ function quiteGame() {
   computerScore.classList.add("score--opacity");
 
   // BTNs
-  settingBtn.classList.add("setting__btn--opacity");
+  volumeBox.classList.remove("volume__box--hide");
   helpBtn.classList.remove("help__btn--hide");
   playBtn.classList.remove("play__btn--deactive");
+  settingBtn.classList.add("setting__btn--opacity");
 
   // RESULT
   result.classList.add("game__result--hide");
@@ -448,7 +482,7 @@ function quiteGame() {
   }
 
   // Sound
-  exit.play();
+  soundEffect("exit");
 }
 // -------------------------
 
@@ -565,6 +599,14 @@ window.addEventListener("load", function () {
 });
 
 magnetBtn.addEventListener("click", startGame);
+
+volumeBtn.forEach((item) => {
+  item.addEventListener("click", volumeEnable);
+});
+
+volume_mutedBtn.forEach((item) => {
+  item.addEventListener("click", volumeDisable);
+});
 
 helpBtn.addEventListener("click", function () {
   instructions();

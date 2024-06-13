@@ -53,6 +53,7 @@ textarea {
   --score-index: 75;
   --game-result-index: 150;
   --help-icon-index: 600;
+  --volume-icon-index: 600;
   --help-index: 500;
   --start-index: 400;
   --setting-index: 300;
@@ -64,6 +65,8 @@ textarea {
   --list-fs: 1.25rem;
   --help-icon-top: 1.25rem;
   --help-icon-right: 1.25rem;
+  --volume-icon-top: 1.25rem;
+  --volume-icon-left: 1.25rem;
   --game-layout: 100dvh;
   --controller-view-p1: none;
   --controller-view-p2: none; }
@@ -87,6 +90,12 @@ body {
 .icon__btn {
   -webkit-tap-highlight-color: transparent; }
 
+.volume {
+  position: absolute;
+  top: var(--volume-icon-top);
+  left: var(--volume-icon-left);
+  z-index: var(--volume-icon-index); }
+
 .help__btn,
 .close__btn {
   position: absolute;
@@ -95,7 +104,9 @@ body {
   z-index: var(--help-icon-index); }
 
 .help__icon,
-.close__icon {
+.close__icon,
+.volume__icon,
+.volume-muted__icon {
   color: var(--white-clr); }
 
 .main {
@@ -369,6 +380,12 @@ body {
 .hide {
   display: none; }
 
+.volume__box--hide {
+  display: none; }
+
+.volume--hide {
+  display: none; }
+
 .help__btn--hide {
   display: none; }
 
@@ -500,8 +517,8 @@ body {
     --customize-span-fs: 1.3rem;
     --customize-select-option-fs: 1.125rem; }
   .setting {
-    --setting-btns-gap: 1.75rem;
-    --setting-icons-fs: 3.5rem; }
+    --setting-btns-gap: 1.5rem;
+    --setting-icons-fs: 3.125rem; }
   .area {
     --paddle-width: 6rem;
     --ball-width: 1.125rem;

@@ -2,6 +2,13 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+.volume {
+  position: absolute;
+  top: var(--volume-icon-top);
+  left: var(--volume-icon-left);
+  z-index: var(--volume-icon-index);
+}
+
 .help__btn,
 .close__btn {
   position: absolute;
@@ -11,7 +18,9 @@
 }
 
 .help__icon,
-.close__icon {
+.close__icon,
+.volume__icon,
+.volume-muted__icon {
   color: var(--white-clr);
 }
 

@@ -43,7 +43,7 @@ export default class Ball {
     this.velocity = INITIAL_VELOCITY;
   }
 
-  update(delta, area, arr) {
+  update(delta, area, arr, vol) {
     this.x += this.direction.x * this.velocity * delta;
     this.y += this.direction.y * this.velocity * delta;
     this.velocity += VELOCITY_INCREASE * delta;
@@ -55,7 +55,9 @@ export default class Ball {
 
     if (arr.some((r) => isCollision(rect, r))) {
       this.direction.y *= -1;
-      paddleHit.play();
+      if (vol) {
+        paddleHit.play();
+      }
     }
   }
 
