@@ -54,10 +54,10 @@ export default class Ball {
     }
 
     if (arr.some((r) => isCollision(rect, r))) {
-      this.direction.y *= -1;
       if (vol) {
         paddleHit.play();
       }
+      this.direction.y *= -1;
     }
   }
 

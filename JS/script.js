@@ -109,6 +109,7 @@ function soundEffect(soundType) {
 
 // --> Mute & Unmute
 function volumeEnable() {
+  volume.play();
   mute = false;
   volumeBtn.forEach((item) => {
     item.classList.add("volume--hide");
@@ -116,10 +117,10 @@ function volumeEnable() {
   volume_mutedBtn.forEach((item) => {
     item.classList.remove("volume--hide");
   });
-  volume.play();
 }
 
 function volumeDisable() {
+  volume.play();
   mute = true;
   volumeBtn.forEach((item) => {
     item.classList.remove("volume--hide");
@@ -127,7 +128,6 @@ function volumeDisable() {
   volume_mutedBtn.forEach((item) => {
     item.classList.add("volume--hide");
   });
-  volume.play();
 }
 // -------------------------
 
@@ -221,31 +221,31 @@ function scoreTable() {
 
   if (secondPlayer == "true") {
     if (Math.floor(rect.top) <= Math.floor(gmBound.top)) {
+      soundEffect("goal");
       playerPoint.textContent =
         parseInt(playerPoint.textContent) < 9
           ? `0${parseInt(playerPoint.textContent) + 1}`
           : parseInt(playerPoint.textContent) + 1;
-      soundEffect("goal");
     } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
+      soundEffect("goal");
       playerSecPoint.textContent =
         parseInt(playerSecPoint.textContent) < 9
           ? `0${parseInt(playerSecPoint.textContent) + 1}`
           : parseInt(playerSecPoint.textContent) + 1;
-      soundEffect("goal");
     }
   } else if (secondPlayer == "false") {
     if (Math.floor(rect.top) <= Math.floor(gmBound.top)) {
+      soundEffect("goal");
       playerPoint.textContent =
         parseInt(playerPoint.textContent) < 9
           ? `0${parseInt(playerPoint.textContent) + 1}`
           : parseInt(playerPoint.textContent) + 1;
-      soundEffect("goal");
     } else if (Math.floor(rect.bottom) >= Math.floor(gmBound.bottom)) {
+      soundEffect("goal");
       computerPoint.textContent =
         parseInt(computerPoint.textContent) < 9
           ? `0${parseInt(computerPoint.textContent) + 1}`
           : parseInt(computerPoint.textContent) + 1;
-      soundEffect("goal");
     }
   }
   ball.reset();
@@ -257,6 +257,9 @@ function scoreTable() {
 
 // --> Start Game
 function startGame() {
+  // Sound
+  soundEffect("startGame");
+
   // Get Number of Rounds
   roundNo = no_of_round.options[no_of_round.selectedIndex];
 
@@ -317,9 +320,6 @@ function startGame() {
     document.documentElement.style.setProperty("--controller-view-p1", "block");
     document.documentElement.style.setProperty("--controller-view-p2", "block");
   }
-
-  // Sound
-  soundEffect("startGame");
 }
 // -------------------------
 
@@ -337,10 +337,12 @@ function updateBall(time) {
         mute
       );
     } else if (secondPlayer == "true") {
-      ball.update(delta, gameArea, [
-        playerPaddle.rect(),
-        secPlayerPaddle.rect(),
-      ]);
+      ball.update(
+        delta,
+        gameArea,
+        [playerPaddle.rect(), secPlayerPaddle.rect()],
+        mute
+      );
     }
 
     if (isLose()) scoreTable();
@@ -364,6 +366,9 @@ function updateSecBall(time) {
 
 // --> Restart Game
 function restartgame() {
+  // Sound
+  soundEffect("startGame");
+
   // BALL
   ball.reset();
   ball.ballEle.style.display = "block";
@@ -401,9 +406,6 @@ function restartgame() {
     lastTime = null;
     id = window.requestAnimationFrame(updateBall);
   }
-
-  // Sound
-  soundEffect("startGame");
 }
 // -------------------------
 
@@ -419,8 +421,8 @@ function resumeBall() {
 
 // --> Pause Game
 function pauseBall() {
-  close_and_open_gameOption();
   soundEffect("pause");
+  close_and_open_gameOption();
   if (id) {
     window.cancelAnimationFrame(id);
     id = null;
@@ -430,6 +432,9 @@ function pauseBall() {
 
 // Quite Game
 function quiteGame() {
+  // Sound
+  soundEffect("exit");
+
   // Score
   playerPoint.textContent = "00";
   playerSecPoint.textContent = "00";
@@ -480,9 +485,6 @@ function quiteGame() {
     document.documentElement.style.setProperty("--controller-view-p1", "none");
     document.documentElement.style.setProperty("--controller-view-p2", "none");
   }
-
-  // Sound
-  soundEffect("exit");
 }
 // -------------------------
 
@@ -504,25 +506,25 @@ function checkScore() {
   const secondPlayerScore = parseInt(playerSecPoint.textContent);
 
   if (roundNo.value == cmpScore && secondPlayer == "false") {
+    soundEffect("loss");
     gameEnd = true;
     announceResult("You Lose");
     gameOver();
-    soundEffect("loss");
   } else if (roundNo.value == playerScore && secondPlayer == "false") {
+    soundEffect("win");
     gameEnd = true;
     announceResult("You Win");
     gameOver();
-    soundEffect("win");
   } else if (roundNo.value == playerScore && secondPlayer == "true") {
+    soundEffect("win");
     gameEnd = true;
     announceResult("Player First Win");
     gameOver();
-    soundEffect("win");
   } else if (roundNo.value == secondPlayerScore && secondPlayer == "true") {
+    soundEffect("win");
     gameEnd = true;
     announceResult("Player Second Win");
     gameOver();
-    soundEffect("win");
   }
 }
 // -------------------------
