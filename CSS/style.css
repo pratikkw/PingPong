@@ -295,7 +295,7 @@ body {
       gap: var(--customize-round-vs-gap); }
     .start .customize__span {
       font-size: var(--customize-span-fs);
-      color: #fff;
+      color: var(--white-clr);
       text-wrap: nowrap; }
     .start .customize__select, .start .customize__option {
       cursor: pointer;
@@ -304,7 +304,7 @@ body {
       font-size: var(--customize-select-option-fs);
       padding: var(--customize-select-option-padding);
       border-radius: 0.25rem;
-      background-color: #fff; }
+      background-color: var(--white-clr); }
 
 .help {
   --help-padding: 2rem 1.5rem;
@@ -454,7 +454,7 @@ body {
     background-color: var(--start-btn-bk-clr);
     color: var(--white-clr); } }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 62.5rem) {
   :root {
     --primary-title-fs: 4rem;
     --txtbox-primary-title-fs: 2rem;
@@ -471,7 +471,7 @@ body {
     --area-before-width: 17rem;
     --game-result-fs: 2.5rem; } }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 43.75rem) {
   :root {
     --general-icon-fs: 2.25rem;
     --list-fs: 1.1rem;
@@ -495,7 +495,7 @@ body {
       flex-direction: column;
       gap: 1rem; } }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 31.25rem) {
   :root {
     --primary-title-fs: 3.5rem;
     --txtbox-primary-title-fs: 1.75rem;
@@ -532,7 +532,7 @@ body {
   .controller {
     --controller-bar-width: 3.25rem; } }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 21.875rem) {
   .area {
     --paddle-width: 5rem;
     --area-before-width: 11rem; } }
